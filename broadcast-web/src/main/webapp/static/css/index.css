@@ -1,0 +1,270 @@
+/*锟斤拷锟斤拷锟斤拷锟斤拷*/
+/*.bgbox{
+	background: url(../img/picture/2.jpg);
+}*/
+body{
+	background: url(../img/picture/th1.jpg) no-repeat !important;
+	background-size: cover!important;
+
+}
+h1 {
+  padding: 0 10px;
+  font-size: 2em;
+}
+li{
+	list-style: none;
+}
+a:hover{
+	text-decoration: none!important;
+}
+.hide{
+	display: none;
+}
+.head{
+	width:100%;
+	height:63px;
+	background: rgba(0, 0, 0, 0.3);
+	/*background-color:#FE13F7;*/
+}
+
+.head a{
+	color:#F9F7F7;
+	font-weight: bolder;
+}
+.headlogo a{
+	font-family: "锟斤拷锟斤拷";
+  	color: #ffffff!important;
+    text-decoration: none!important;
+}
+.headlogo a:hover{
+	color:#FFFFFF;
+}
+.headlogo h1:hover{
+	color:#FFFFFF;
+}
+.headlogo{
+	height:60px;
+	text-align:left;
+	line-height: 60px;
+	padding-left:1%;
+}
+
+.head .headnav li a{
+	height:63px;
+	width:90px;
+	display: block;
+	background: rgba(0, 0, 0, 0.8);
+	text-align: center;
+	/* background: url(../img/picture/锟斤拷页.png) no-repeat; */
+	background: no-repeat;
+	color: #fff;
+}
+.head .headnav li.menu_0 a{
+	background-position: center -95px;
+}
+.head .headnav li.menu_1 a{
+	background-position: center -195px;
+}
+.head .headnav li.menu_2 a{
+	background-position: center -295px;
+}
+.head .headnav li.menu_3 a{
+	background-position: center -395px;
+}
+
+
+.headlink li a{
+	color:#D9D4D4;
+}
+/*锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷*/
+
+.head .headnav li{
+	float:left;
+	margin-right: 0px;
+}
+
+.leftmenu dl{
+	margin-bottom: 0px
+}
+@media (max-width:1400px){
+	.headlink li{
+		float: left;
+		height:63px;
+		display: block;
+		background: no-repeat;
+		text-align: center;
+	}
+	.leftmenu dl dt{
+		width:100%;
+		height:33px;
+		line-height: 33px!important;
+		/*text-align: center;*/
+		text-indent: 20%;
+		font-weight: bold;
+		color:#fff;
+		background-position: right -30px;
+		cursor: pointer;
+	}
+
+	.head .headnav li{
+		line-height: 78px;
+	}
+	/*锟斤拷嗟硷拷锟斤拷锟绞�*/
+	.leftmenu{
+		width:15%;
+		position:absolute;
+		top:70px;
+		left:5px;
+		bottom: 0;
+		z-index: 5;
+		overflow-x:hidden;
+		overflow-y:auto;
+		background: rgba(0, 0, 0, 0.3);
+	}
+		.rightmain{
+		position:absolute;
+		top:63px;
+		left:15%;
+		bottom:0;
+		right:0;
+		overflow: hidden;
+		/*锟斤拷锟杰伙拷锟斤拷止锟斤拷锟斤拷锟�*/
+	}
+	.leftmenu dl dd ul li{
+		width:100%;
+		height: 33px;
+		float: right;
+		line-height: 33px;
+		text-indent: 20%;
+	}
+}
+
+@media (min-width:1400px){
+
+    .headlogo{
+        width: 30%;
+    }
+	.headlink li{
+		float: left;
+		height:75px!important;
+		width:75px!important;
+		display: block;
+		background: no-repeat;
+		text-align: center;
+	}
+	.head .headnav li{
+		line-height: 108px;
+		font-size: 15px;
+	}
+	/*锟斤拷嗟硷拷锟斤拷锟绞�*/
+	.leftmenu{
+		width:15%;
+		position:absolute;
+		top:85px;
+		left:5px;
+		bottom: 0;
+		z-index: 5;
+		overflow-x:hidden;
+		overflow-y:auto;
+		background: rgba(0, 0, 0, 0.3);
+	}
+		.rightmain{
+		position:absolute;
+		top:80px;
+		left:15%;
+		bottom:0;
+		right:0;
+		overflow: hidden;
+		/*锟斤拷锟杰伙拷锟斤拷止锟斤拷锟斤拷锟�*/
+	}
+
+
+	.leftmenu dl dt{
+		width:100%;
+		height:43px;
+		line-height: 43px!important;
+		/*text-align: center;*/
+		text-indent: 20%;
+		font-weight: bold;
+		color:#fff;
+		background-position: right -30px;
+		cursor: pointer;
+		font-size: 15px;
+	}
+
+	.head .headnav{
+		margin-top: 5px;
+	}
+	.head .headnav li a {
+	    height: 70px;
+	    width: 100px;
+	    display: block;
+	    background: rgba(0, 0, 0, 0.8);
+	    text-align: center;
+	    background: url(../img/picture/锟斤拷页.png) no-repeat;
+	    background: no-repeat;
+	    color: #fff;
+	}
+	.head{
+		height: 80px;
+	}
+
+	.leftmenu dl dd ul li{
+		width:100%;
+		height: 33px;
+		float: right;
+		line-height: 33px;
+		text-indent: 32%;
+	}
+}
+
+
+.leftmenu dl dd{
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.leftmenu dl dd ul li a{
+	width:169px;
+	height:30px;
+	line-height: 30px;
+	display: block;    /*锟竭匡拷锟斤拷锟斤拷*/
+}
+
+
+
+
+/*锟揭诧拷锟斤拷锟藉部锟街匡拷始*/
+
+/*锟斤拷锟斤拷锟斤拷式锟斤拷始*/
+
+/*锟斤拷锟斤拷锟斤拷式锟斤拷锟斤拷*/
+
+.rightmain1{
+	position:absolute;
+	top:63px;
+	left:0;
+	bottom:0;
+	right:0;
+	overflow: hidden;
+	/*锟斤拷锟杰伙拷锟斤拷止锟斤拷锟斤拷锟�*/
+}
+
+.rightcontent{
+	height:100%;
+	padding: 17px 10px 10px 17px;
+	
+}
+.rightcontent iframe{
+	width:100%;
+	height:100%;
+}
+
+.nav.nav-tabs>ul>li>a:focus{
+	background: none!important;
+}
+ html::-webkit-scrollbar {
+        display: none!important;
+    }
+    
+   
+    

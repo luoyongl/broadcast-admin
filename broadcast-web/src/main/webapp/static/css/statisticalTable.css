@@ -1,0 +1,23 @@
+.statisticalTable_content{
+	width: 96%;
+	height: 93%;
+	border: 1px solid #0083f0;
+	border-radius: 15px;
+	box-sizing: border-box;
+	margin: 2%;
+}
+.statisticalTable_left{
+	width: 49%;
+	height: 100%;
+	margin-left: 1%;
+	border-right: 1px solid #0083f0;
+	float: left;
+}
+
+.statisticalTable_right{
+	width: 48%;
+	height: 100%;
+	margin-left: 1%;
+	/*border: 1px solid #0083f0;*/
+	float: left;
+}

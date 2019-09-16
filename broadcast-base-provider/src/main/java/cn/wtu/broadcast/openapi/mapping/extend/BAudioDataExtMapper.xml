@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BAudioDataExtMapper" >
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BAudioData" >
+        <id column="f_id" property="fId" jdbcType="INTEGER" />
+        <result column="f_audio_name" property="fAudioName" jdbcType="VARCHAR" />
+        <result column="f_audio_url" property="fAudioUrl" jdbcType="VARCHAR" />
+        <result column="f_audio_size" property="fAudioSize" jdbcType="VARCHAR" />
+        <result column="f_time" property="fTime" jdbcType="INTEGER" />
+        <result column="f_bit_rate" property="fBitRate" jdbcType="INTEGER" />
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR" />
+        <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+        <result column="f_sample_rate" property="fSampleRate" jdbcType="DECIMAL" />
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+    </resultMap>
+    <select id="selectAudioList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select a.* from b_audio_data a
+        LEFT JOIN t_user u on
+        a.f_creator_id = u.f_id
+        where a.f_delete_flag = 0
+        <if test=" searchText!=null  and searchText!=''">
+            AND(
+            a.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            a.f_audio_name LIKE binary CONCAT('%', #{searchText},'%') or
+            a.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            u.f_username LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+
+        <if test="sortName!=null and sortOrder!='' and sortOrder!=null and sortName!=''">
+             ORDER BY a.${sortName} ${sortOrder}
+        </if>
+    </select>
+    
+    <select id="selectUsedAudio" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  		select count(*) from b_program_channel 
+  		where f_delete_flag=0 and f_media_url=(select f_audio_url from b_audio_data where f_id=#{id})
+    </select>
+</mapper>

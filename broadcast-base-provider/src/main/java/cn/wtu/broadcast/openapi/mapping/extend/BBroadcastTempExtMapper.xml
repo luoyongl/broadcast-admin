@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BBroadcastTempExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BroadCastDataVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER" />
+        <result column="f_broadcast_name" property="fBroadcastName"
+                jdbcType="VARCHAR" />
+        <result column="f_broadcast_type" property="fBroadcastType"
+                jdbcType="TINYINT" />
+        <result column="f_state" property="fState"
+                jdbcType="TINYINT" />
+        <result column="f_control_device" property="fControlDevice"
+                jdbcType="INTEGER" />
+        <result column="f_program_pass" property="fProgramPass"
+                jdbcType="VARCHAR" />
+        <result column="f_message_type" property="fMessageType"
+                jdbcType="INTEGER" />
+        <result column="f_volume_control" property="fVolumeControl"
+                jdbcType="TINYINT" />
+        <result column="f_broadcast_to" property="fBroadcastTo"
+                jdbcType="VARCHAR" />
+        <result column="f_pass_select" property="fPassSelect" jdbcType="INTEGER" />
+        <result column="f_message_level" property="fMessageLevel"
+                jdbcType="INTEGER" />
+        <result column="f_broadcast_area" property="fBroadcastArea"
+                jdbcType="VARCHAR" />
+        <result column="f_message_source" jdbcType="INTEGER" property="fMessageSource" />
+        <result column="f_message_command_type" property="fMessageCommandType"
+                jdbcType="VARCHAR" />
+        <result column="f_broadcast_terminal_count" property="fBroadcastTerminalCount"
+                jdbcType="INTEGER" />
+        <result column="f_response_terminal_count" property="fResponseTerminalCount"
+                jdbcType="INTEGER" />
+        <result column="f_effective_time" property="fEffectiveTime" jdbcType="TIMESTAMP" />
+        <result column="f_state" property="fState" jdbcType="TINYINT" />
+        <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+        <result column="f_create_id" property="fCreateId" jdbcType="INTEGER" />
+        <result column="f_updtate_time" property="fUpdtateTime" jdbcType="TIMESTAMP" />
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR" />
+        <result column="creator" property="creator" jdbcType="VARCHAR" />
+        <result column="operator" property="operator" jdbcType="VARCHAR" />
+        <result column="f_real_messageLevel" property="fRealMessageLevel"
+                jdbcType="VARCHAR" />
+        <result column="f_value_messageType" property="fRealMessageType"
+                jdbcType="VARCHAR" />
+        <result column="f_real_msgresource" property="fRealMessageSource"
+                jdbcType="VARCHAR" />
+        <result column="f_real_broadcast_to" property="fRealBroadcastTo"
+                jdbcType="VARCHAR" />
+        <result column="f_real_control_device" property="fRealControlDevice"
+                jdbcType="VARCHAR" />
+
+    </resultMap>
+    <select id="selectBroadcast" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        b.*,
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as f_real_messageLevel,
+        b_de.f_device_name as f_real_control_device,
+        GROUP_CONCAT(distinct t.f_name) as f_real_area,
+        GROUP_CONCAT(distinct t_bto.f_dictionary_content) as f_real_broadcast_to,
+        t_msg.f_dictionary_content as f_value_messageType,
+        a_msg.f_name as f_real_msgresource
+        from b_broadcast_data b
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+        LEFT JOIN t_dictionary t_bto
+        ON FIND_IN_SET(t_bto.f_id,b.f_broadcast_to)
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+        left join b_broadcast_temp b_temp
+        on b.f_id=b_temp.f_broadcast_id
+        WHERE b.f_delete_flag=0 and b.f_id=b_temp.f_broadcast_id
+        <if test="searchText!='' and searchText!=null">
+            AND (
+            b.f_effective_time LIKE binary CONCAT('%',#{searchText},'%') or
+            b.f_id LIKE binary CONCAT('%',#{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%',#{searchText},'%') or
+            t_msg.f_dictionary_content LIKE binary CONCAT('%',#{searchText},'%') or
+            a_msg.f_name LIKE binary CONCAT('%',#{searchText},'%') or
+            t_r_operate.f_username LIKE binary CONCAT('%',#{searchText},'%') or
+            t.f_name LIKE binary CONCAT('%',#{searchText},'%')
+            )
+        </if>
+        GROUP BY b.f_id
+    </select>
+</mapper>

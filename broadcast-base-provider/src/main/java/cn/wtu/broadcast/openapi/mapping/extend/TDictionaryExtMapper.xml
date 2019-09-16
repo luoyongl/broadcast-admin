@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.TDictionaryExtMapper">
+	<resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.TDictionary">
+		<id column="f_id" property="fId" jdbcType="INTEGER" />
+		<result column="f_dictionary_type" property="fDictionaryType"
+			jdbcType="INTEGER" />
+		<result column="f_dictionary_code" property="fDictionaryCode"
+			jdbcType="VARCHAR" />
+		<result column="f_third_code" property="fThirdCode" jdbcType="VARCHAR" />
+		<result column="f_dictionary_content" property="fDictionaryContent"
+			jdbcType="VARCHAR" />
+		<result column="f_sort" property="fSort" jdbcType="TINYINT" />
+		<result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+		<result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+		<result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+		<result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		f_id, f_dictionary_type, f_dictionary_code, f_third_code,
+		f_dictionary_content, f_sort,
+		f_create_time, f_creator_id, f_update_time, f_operator_id, f_delete_flag
+	</sql>
+	<select id="selectPidList" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from t_dictionary a
+		WHERE
+		a.f_dictionary_code = 'pid'
+		AND a.f_dictionary_type != 0
+		AND a.f_delete_flag = 0
+		AND !FIND_IN_SET(a.f_dictionary_content, #{usedPidList})
+	</select>
+	
+	<!--更新调制方式 参数 ServiceID  PCRPID DTMB DVB-C 2019/02/25 lxg  -->
+	<update id="updateModulation">
+	    update t_dictionary set f_third_code=#{0} where f_dictionary_content=#{1} and f_delete_flag = 0
+	</update>
+	
+	<select id="getThirdCodeById" resultType="String">
+        select f_third_code from  t_dictionary where f_id = #{fId}	and f_delete_flag = 0
+	</select>
+	
+	<select id="selectAdapterOrSoundDeviceIds" resultType="Integer">
+         select f_id from  t_dictionary where f_dictionary_code =#{type} and f_third_code = "01"  and f_delete_flag = 0
+	</select>
+	
+</mapper>

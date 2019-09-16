@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.TOperationLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_userid" property="fUserid" jdbcType="INTEGER" />
+    <result column="f_username" property="fUsername" jdbcType="VARCHAR" />
+    <result column="f_operation_time" property="fOperationTime" jdbcType="TIMESTAMP" />
+    <result column="f_operation_type" property="fOperationType" jdbcType="TINYINT" />
+    <result column="f_operation_content" property="fOperationContent" jdbcType="VARCHAR" />
+    <result column="f_operation_result" property="fOperationResult" jdbcType="VARCHAR" />
+    <result column="f_ip" property="fIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_userid, f_username, f_operation_time, f_operation_type, f_operation_content, 
+    f_operation_result, f_ip
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wtu.broadcast.openapi.model.TOperationLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_operation_log
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_operation_log
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wtu.broadcast.openapi.model.TOperationLogExample" >
+    delete from t_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_operation_log (f_userid, f_username, f_operation_time, 
+      f_operation_type, f_operation_content, f_operation_result, 
+      f_ip)
+    values (#{fUserid,jdbcType=INTEGER}, #{fUsername,jdbcType=VARCHAR}, #{fOperationTime,jdbcType=TIMESTAMP}, 
+      #{fOperationType,jdbcType=TINYINT}, #{fOperationContent,jdbcType=VARCHAR}, #{fOperationResult,jdbcType=VARCHAR}, 
+      #{fIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fUserid != null" >
+        f_userid,
+      </if>
+      <if test="fUsername != null" >
+        f_username,
+      </if>
+      <if test="fOperationTime != null" >
+        f_operation_time,
+      </if>
+      <if test="fOperationType != null" >
+        f_operation_type,
+      </if>
+      <if test="fOperationContent != null" >
+        f_operation_content,
+      </if>
+      <if test="fOperationResult != null" >
+        f_operation_result,
+      </if>
+      <if test="fIp != null" >
+        f_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fUserid != null" >
+        #{fUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fUsername != null" >
+        #{fUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperationTime != null" >
+        #{fOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperationType != null" >
+        #{fOperationType,jdbcType=TINYINT},
+      </if>
+      <if test="fOperationContent != null" >
+        #{fOperationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperationResult != null" >
+        #{fOperationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null" >
+        #{fIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wtu.broadcast.openapi.model.TOperationLogExample" resultType="java.lang.Integer" >
+    select count(*) from t_operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_operation_log
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fUserid != null" >
+        f_userid = #{record.fUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fUsername != null" >
+        f_username = #{record.fUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fOperationTime != null" >
+        f_operation_time = #{record.fOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fOperationType != null" >
+        f_operation_type = #{record.fOperationType,jdbcType=TINYINT},
+      </if>
+      <if test="record.fOperationContent != null" >
+        f_operation_content = #{record.fOperationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fOperationResult != null" >
+        f_operation_result = #{record.fOperationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fIp != null" >
+        f_ip = #{record.fIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_operation_log
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_userid = #{record.fUserid,jdbcType=INTEGER},
+      f_username = #{record.fUsername,jdbcType=VARCHAR},
+      f_operation_time = #{record.fOperationTime,jdbcType=TIMESTAMP},
+      f_operation_type = #{record.fOperationType,jdbcType=TINYINT},
+      f_operation_content = #{record.fOperationContent,jdbcType=VARCHAR},
+      f_operation_result = #{record.fOperationResult,jdbcType=VARCHAR},
+      f_ip = #{record.fIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    update t_operation_log
+    <set >
+      <if test="fUserid != null" >
+        f_userid = #{fUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fUsername != null" >
+        f_username = #{fUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperationTime != null" >
+        f_operation_time = #{fOperationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperationType != null" >
+        f_operation_type = #{fOperationType,jdbcType=TINYINT},
+      </if>
+      <if test="fOperationContent != null" >
+        f_operation_content = #{fOperationContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperationResult != null" >
+        f_operation_result = #{fOperationResult,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null" >
+        f_ip = #{fIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    update t_operation_log
+    set f_userid = #{fUserid,jdbcType=INTEGER},
+      f_username = #{fUsername,jdbcType=VARCHAR},
+      f_operation_time = #{fOperationTime,jdbcType=TIMESTAMP},
+      f_operation_type = #{fOperationType,jdbcType=TINYINT},
+      f_operation_content = #{fOperationContent,jdbcType=VARCHAR},
+      f_operation_result = #{fOperationResult,jdbcType=VARCHAR},
+      f_ip = #{fIp,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+</mapper>

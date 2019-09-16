@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.TOperationLogExtMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.TOperationLog" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_userid" property="fUserid" jdbcType="INTEGER" />
+    <result column="f_username" property="fUsername" jdbcType="VARCHAR" />
+    <result column="f_operation_time" property="fOperationTime" jdbcType="TIMESTAMP" />
+    <result column="f_operation_type" property="fOperationType" jdbcType="TINYINT" />
+    <result column="f_operation_content" property="fOperationContent" jdbcType="VARCHAR" />
+    <result column="f_operation_result" property="fOperationResult" jdbcType="VARCHAR" />
+    <result column="f_ip" property="fIp" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selectBySearchInfoAndTime" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  	select * from t_operation_log WHERE f_operation_time BETWEEN #{startTime} and #{endTime}
+	and (f_operation_content LIKE #{searchInfo} or f_username LIKE #{searchInfo} or f_operation_type LIKE #{searchInfo} or f_operation_result LIKE #{searchInfo})
+  </select>
+
+</mapper>

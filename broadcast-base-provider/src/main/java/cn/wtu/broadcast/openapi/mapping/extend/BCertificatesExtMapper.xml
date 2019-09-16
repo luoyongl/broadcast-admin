@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BCertificatesExtMapper" >
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BCertificatesVO" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR" />
+    <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR" />
+    <result column="f_device_id" property="fDeviceId" jdbcType="INTEGER" />
+    <result column="f_certificates_number" property="fCertificatesNumber" jdbcType="VARCHAR" />
+    <result column="f_start_date_of_validity" property="fStartDateOfValidity" jdbcType="DATE" />
+    <result column="f_end_date_of_validity" property="fEndDateOfValidity" jdbcType="DATE" />
+    <result column="f_private_key" property="fPrivateKey" jdbcType="VARCHAR" />
+    <result column="f_public_key" property="fPublicKey" jdbcType="VARCHAR" />
+    <result column="f_remark" property="fRemark" jdbcType="VARCHAR" />
+    <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+    <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+    <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+    <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+    <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+  </resultMap>
+    <select id="selecteCertificatesVO" parameterType="java.util.Map" resultMap="BaseResultMap">
+       SELECT
+		b.*, b_device_info.f_device_name AS f_device_name,b_device_info.f_device_resource_code
+		FROM
+		b_certificates b
+		LEFT JOIN b_device_info ON b.f_device_id = b_device_info.f_id
+		WHERE
+		b.f_delete_flag = 0
+		 <if test="searchText!=''and searchText!=null">
+            AND(
+            b_device_info.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_certificates_number LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_start_date_of_validity LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_end_date_of_validity LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_private_key LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_public_key LIKE binary CONCAT('%', #{searchText},'%') 
+            )
+        </if>
+       group by b.f_id
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

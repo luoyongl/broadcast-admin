@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BBroadcastTimingExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BroadcastTimingVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_plan_name" property="fPlanName" jdbcType="VARCHAR"/>
+        <result column="f_message_type" property="fMessageType" jdbcType="INTEGER"/>
+        <result column="f_volume" property="fVolume" jdbcType="INTEGER"/>
+        <result column="f_message_level" property="fMessageLevel" jdbcType="INTEGER"/>
+        <result column="f_drill_category" property="fDrillCategory" jdbcType="INTEGER"/>
+        <result column="f_audio_file" property="fAudioFile" jdbcType="VARCHAR"/>
+        <result column="f_frequent_audio" property="fFrequentAudio" jdbcType="INTEGER"/>
+        <result column="f_broadcast_area" property="fBroadcastArea" jdbcType="VARCHAR"/>
+        <result column="f_start_date" property="fStartDate" jdbcType="DATE"/>
+        <result column="f_end_date" property="fEndDate" jdbcType="DATE"/>
+        <result column="f_choose_week" property="fChooseWeek" jdbcType="VARCHAR"/>
+        <result column="f_start_time" property="fStartTime" jdbcType="TIME"/>
+        <result column="f_end_time" property="fEndTime" jdbcType="TIME"/>
+        <result column="f_time_interval" property="fTimeInterval" jdbcType="INTEGER"/>
+        <result column="f_single_broadcast_time" property="fSingleBroadcastTime" jdbcType="TIMESTAMP"/>
+        <result column="f_repeate_time" property="fRepeateTime" jdbcType="INTEGER"/>
+        <result column="f_control_device" property="fControlDevice" jdbcType="INTEGER"/>
+        <result column="f_device_channel" property="fDeviceChannel" jdbcType="INTEGER"/>
+        <result column="f_broadcast_to" property="fBroadcastTo" jdbcType="VARCHAR"/>
+        <result column="f_message_source" property="fMessageSource" jdbcType="INTEGER"/>
+        <result column="f_last_broadcast_time" property="fLastBroadcastTime" jdbcType="TIMESTAMP"/>
+        <result column="f_broadcasted_times" property="fBroadcastedTimes" jdbcType="INTEGER"/>
+        <result column="f_review_flag" property="fReviewFlag" jdbcType="TINYINT"/>
+        <result column="f_sort" property="fSort" jdbcType="TINYINT"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_create_id" property="fCreateId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="f_audio_file_name" property="fAudioFileName" jdbcType="VARCHAR"/>
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="f_real_messageLevel" property="fRealMessageLevel" jdbcType="VARCHAR"/>
+        <result column="f_value_messageType" property="fRealMessageType" jdbcType="VARCHAR"/>
+        <result column="f_real_msgresource" property="fRealMessageSource" jdbcType="VARCHAR"/>
+        <result column="f_start_date_time" property="fstartDateTime" jdbcType="VARCHAR"/>
+        <result column="f_end_date_time" property="fendDateTime" jdbcType="VARCHAR"/>
+        <result column="f_real_broadcast_to" property="fRealBroadcastTo" jdbcType="VARCHAR"/>
+        <result column="f_fm_file_name" property="fFMFileName" jdbcType="VARCHAR"/>
+        <result column="f_parent_node" property="fParentNode"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectBoradcastAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        b.*,
+        t_u_create.f_username AS creator,
+        t_u_operate.f_username AS operator,
+        t_d.f_dictionary_content as f_real_messageLevel,
+        t_msg.f_dictionary_content as f_value_messageType,
+        <!-- LEFT(b.f_audio_file,1), -->
+        <!-- <if test=" LEFT(f_audio_file,1) != 'f'"> -->
+        b_a.f_audio_name AS f_audio_file_name,
+        t_set.f_dictionary_content AS f_fm_file_name,
+        <!-- </if>
+        <if test="SUBSTR(b.f_audio_file,0,1) == 'f'">
+            t_set.f_dictionary_content AS f_audio_file_name,
+        </if> -->
+        CONCAT(b.f_start_date,' ',b.f_start_time) AS f_start_date_time,
+        CONCAT(b.f_end_date,' ',b.f_end_time) AS f_end_date_time,
+        GROUP_CONCAT(distinct t.f_name) as f_real_area,
+        GROUP_CONCAT(distinct t_con.f_dictionary_content) as f_real_broadcast_to,
+        a_msg.f_name as f_real_msgresource,
+        a_msg.f_parent_node as f_parent_node
+        FROM b_broadcast_timing b
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN t_dictionary t_con
+        ON FIND_IN_SET(t_con.f_id,b.f_broadcast_to)
+        LEFT JOIN t_user t_u_create
+        ON FIND_IN_SET(t_u_create.f_id,b.f_create_id)
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+        LEFT JOIN t_user t_u_operate
+        ON FIND_IN_SET(t_u_operate.f_id,b.f_operator_id)
+        <!-- LEFT JOIN b_audio_data b_a
+            ON b.f_audio_file=b_a.f_id -->
+        LEFT JOIN b_audio_data b_a
+        ON b.f_audio_file=b_a.f_id
+        LEFT JOIN t_dictionary t_set
+        ON b.f_frequent_audio=t_set.f_id
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+        WHERE b.f_delete_flag!='1'
+        <if test="reviewRegion != null and reviewRegion != '' and parentNode != null and parentNode != ''">
+            AND IF(${parentNode}  =0,a_msg.f_parent_node = a_msg.f_parent_node,(b.f_message_source=${reviewRegion} or a_msg.f_parent_node=${reviewRegion}) or a_msg.f_parent_node=21)
+        </if>
+        <if test="search != null and search != ''">
+            <!-- AND CONCAT(b.f_id,b.f_plan_name,b.f_broadcast_area,b.f_volume) LIKE '%' #{search} '%'  -->
+            AND (
+            b.f_plan_name LIKE binary CONCAT('%',#{search},'%') or
+            b.f_id LIKE binary CONCAT('%',#{search},'%') or
+            t_u_create.f_username LIKE binary CONCAT('%',#{search},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%',#{search},'%') or
+            t_msg.f_dictionary_content LIKE binary CONCAT('%',#{search},'%') or
+            a_msg.f_name LIKE binary CONCAT('%',#{search},'%') or
+            b.f_start_date LIKE binary CONCAT('%',#{search},'%') or
+            b.f_start_time LIKE binary CONCAT('%',#{search},'%') or
+            b.f_end_date LIKE binary CONCAT('%',#{search},'%') or
+            b.f_end_time LIKE binary CONCAT('%',#{search},'%')
+            )
+        </if>
+        <if test=" searchEq !='' and searchEq != null">
+            AND b.f_review_flag=#{searchEq}
+        </if>
+        GROUP BY b.f_id
+        <if test="pageSortName == null">
+            ORDER BY b.f_create_time DESC
+        </if>
+        <if test="pageSortName != null and pageOrderName != null">
+            <if test="pageSortName == 'f_start_date_time' or pageSortName == 'f_end_date_time'">
+                ORDER BY ${pageSortName} ${pageOrderName}
+            </if>
+            <if test="pageSortName != 'f_start_date_time' and pageSortName != 'f_end_date_time'">
+                ORDER BY b.${pageSortName} ${pageOrderName}
+            </if>
+        </if>
+    </select>
+</mapper>

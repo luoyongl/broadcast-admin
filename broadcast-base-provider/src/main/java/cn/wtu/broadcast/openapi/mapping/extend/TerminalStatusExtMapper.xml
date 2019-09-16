@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.TerminalStatusExtMapper">
+    <select id="queryPageByTeminalStatusType" resultType="cn.wtu.broadcast.openapi.vo.TerminalStatusVO"
+            parameterType="java.util.Map">
+        select
+        b.f_id AS fId,b.f_text_url as fTextUrl,b.f_program_pass as fProgramPass,
+        b.f_message_source AS fMessageSource,
+        b.f_broadcast_type AS fBroadcastType,
+        b.f_message_type AS fMessageType,
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        <!-- 时段 -->
+        b.f_volume_control AS fVolumeControl,
+        <!-- 文本消息实体 -->
+        b.f_broadcast_to AS fBroadcastTo,
+
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        b_de.f_device_name as fRealControlDevice,
+        GROUP_CONCAT(distinct t.f_name) as fRealArea,
+        GROUP_CONCAT(distinct t_bto.f_dictionary_content) as fRealBroadcastTo,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMessageSource,
+        b_de.f_device_resource_code AS fDeviceResourceCode
+        from b_broadcast_data b
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+        LEFT JOIN t_dictionary t_bto
+        ON FIND_IN_SET(t_bto.f_id,b.f_broadcast_to)
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+        WHERE b.f_delete_flag=0 and b.f_state IN (3, 4)
+        GROUP BY b.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+    <select id="queryPageByTeminalRecordType" parameterType="java.util.Map"
+            resultType="cn.wtu.broadcast.openapi.vo.TerminalStatusVO">
+        select
+        b.f_id AS fId,b.f_text_url as fTextUrl,b.f_program_pass as fProgramPass,
+        b.f_message_source AS fMessageSource,
+        b.f_broadcast_type AS fBroadcastType,
+        b.f_message_type AS fMessageType,
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        <!-- 时段 -->
+        b.f_volume_control AS fVolumeControl,
+        <!-- 文本消息实体 -->
+        b.f_broadcast_to AS fBroadcastTo,
+
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        b_de.f_device_name as fRealControlDevice,
+        GROUP_CONCAT(distinct t.f_name) as fRealArea,
+        GROUP_CONCAT(distinct t_bto.f_dictionary_content) as fRealBroadcastTo,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMessageSource,
+        b_cdi.f_device_resource_code AS fDeviceResourceCode,
+        b_dsr.f_start_play_time AS fStartPlayTime
+        from b_broadcast_data b
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+        LEFT JOIN t_dictionary t_bto
+        ON FIND_IN_SET(t_bto.f_id,b.f_broadcast_to)
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+        LEFT JOIN b_device_info b_cdi
+        ON b.f_control_device=b_cdi.f_id
+        LEFT JOIN b_device_state_return b_dsr
+        ON b.f_control_device=b_dsr.f_device_id
+        WHERE b.f_delete_flag=0 and b.f_state IN (4)
+        <if test="fStartTime!=null and fEndTime!=null and fStartTime!='' and fEndTime!=''">
+            AND b_dsr.f_start_play_time BETWEEN #{fStartTime} AND #{fEndTime}
+        </if>
+        GROUP BY b.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+    <select id="selectProtocolType" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+        t_d.f_dictionary_content
+        FROM t_device_channel_protocol t_dcp
+        LEFT JOIN t_dictionary t_d
+        ON t_dcp.protocol_type=t_d.f_id
+        WHERE t_dcp.f_id=#{fBroadcastTo1}
+    </select>
+
+
+    <select id="queryPageByTerminalRecordListForTime" parameterType="java.util.Map"
+            resultType="cn.wtu.broadcast.openapi.vo.TerminalStatusVO">
+        select
+        b.f_id AS fId,b.f_text_url as fTextUrl,b.f_program_pass as fProgramPass,
+        b.f_message_source AS fMessageSource,
+        b.f_broadcast_type AS fBroadcastType,
+        b.f_message_type AS fMessageType,
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        b.f_volume_control AS fVolumeControl,
+
+        b.f_broadcast_to AS fBroadcastTo,
+
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        b_de.f_device_name as fRealControlDevice,
+        GROUP_CONCAT(distinct t.f_name) as fRealArea,
+        GROUP_CONCAT(distinct t_bto.f_dictionary_content) as fRealBroadcastTo,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMessageSource,
+        b_cdi.f_device_resource_code AS fDeviceResourceCode,
+        b_dsr.f_start_play_time AS fStartPlayTime
+        from b_broadcast_data b
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+        LEFT JOIN t_dictionary t_bto
+        ON FIND_IN_SET(t_bto.f_id,b.f_broadcast_to)
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+        LEFT JOIN b_device_info b_cdi
+        ON b.f_control_device=b_cdi.f_id
+        LEFT JOIN b_device_state_return b_dsr
+        ON b.f_control_device=b_dsr.f_device_id
+        WHERE b.f_delete_flag=0 and b.f_state IN (4) AND b_dsr.f_start_play_time BETWEEN #{fStartTime} AND #{fEndTime}
+        GROUP BY b.f_id
+    </select>
+
+    <select id="queryState" resultType="cn.wtu.broadcast.openapi.vo.TerminalStatusVO" parameterType="java.util.Map">
+        
+	 select DISTINCT fId,fTextUrl,fProgramPass,fRealControlDevice,fRealMessageLevel,
+	 fRealMessageSource,fRealMessageType,fBroadcastType,fVolumeControl,
+	 fCode,fAudioName,fAudioUrl from(
+	        select DISTINCT b.f_id as fId,b.f_text_url as fTextUrl,b.f_program_pass as fProgramPass,
+	        b_dev.f_device_name as fRealControlDevice,
+	        t_d.f_dictionary_content as fRealMessageLevel,
+	        a_msg.f_name as fRealMessageSource,
+	        t_msg.f_dictionary_content as fRealMessageType,
+	        b.f_broadcast_type AS fBroadcastType,
+	        b.f_volume_control as fVolumeControl,
+	        b_dev.f_device_resource_code AS fCode,
+	        b_ad.f_audio_name as fAudioName,
+	        b_ad.f_audio_url as fAudioUrl
+	        from b_broadcast_device b_d
+	        left join b_broadcast_data b
+	        on b_d.f_broadcast_id=b.f_id
+	        LEFT JOIN b_device_info b_dev
+	        ON b_d.f_device_id=b_dev.f_id
+	        LEFT JOIN t_dictionary t_msg
+	        ON b.f_message_type=t_msg.f_id
+	        LEFT JOIN t_dictionary t_d
+	        ON b.f_message_level=t_d.f_id
+	        LEFT JOIN t_administrative_division a_msg
+	        ON b.f_message_source=a_msg.f_id
+	        left join b_program_channel b_a
+	        on b.f_program_pass=b_a.f_id
+	        left join b_audio_data b_ad
+	        on b_a.f_media_url=b_ad.f_audio_url
+	        where b_dev.f_delete_flag=0 and b.f_delete_flag=0 
+	        <if test="fDeviceState!=null and fDeviceState!=''">
+	        	AND b_dev.f_device_state='0'
+	        </if>
+	        <if test="fBroadcastType!=null and fBroadcastType!=''">
+	            AND b.f_state=#{fBroadcastType}
+	        </if>
+	        <if test="devType!=null">
+	            AND b_dev.f_code=01 and b_dev.f_device_type=0
+	        </if>
+	        <if test="searchText!=''and searchText!=null">
+	            AND (
+	            b_dev.f_device_name LIKE binary CONCAT('%',#{searchText},'%') or
+	            b.f_id LIKE binary CONCAT('%',#{searchText},'%') or
+	            t_d.f_dictionary_content LIKE binary CONCAT('%',#{searchText},'%') or
+	            a_msg.f_name LIKE binary CONCAT('%',#{searchText},'%') or
+	            t_msg.f_dictionary_content LIKE binary CONCAT('%',#{searchText},'%') or
+	            b_dev.f_device_resource_code LIKE binary CONCAT('%',#{searchText},'%') or
+	            b_ad.f_audio_name  LIKE binary CONCAT('%',#{searchText},'%')
+	            )
+	        </if>
+	        order by b.f_create_time desc
+	   ) temp order by fId desc    
+    </select>
+</mapper>

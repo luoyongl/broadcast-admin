@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.BDeviceInputChannelMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceInputChannel" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_input_channel_id" property="fInputChannelId" jdbcType="INTEGER" />
+    <result column="f_parameter_set_id" property="fParameterSetId" jdbcType="INTEGER" />
+    <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR" />
+    <result column="f_device_channel_name" property="fDeviceChannelName" jdbcType="VARCHAR" />
+    <result column="f_input_channel_number" property="fInputChannelNumber" jdbcType="INTEGER" />
+    <result column="f_input_channel_group" property="fInputChannelGroup" jdbcType="INTEGER" />
+    <result column="f_device_channel_state" property="fDeviceChannelState" jdbcType="VARCHAR" />
+    <result column="f_operator" property="fOperator" jdbcType="INTEGER" />
+    <result column="f_operate_time" property="fOperateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_input_channel_id, f_parameter_set_id, f_device_resource_code, f_device_channel_name, 
+    f_input_channel_number, f_input_channel_group, f_device_channel_state, f_operator, 
+    f_operate_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_device_input_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_device_input_channel
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_device_input_channel
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannelExample" >
+    delete from b_device_input_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_input_channel (f_input_channel_id, f_parameter_set_id, 
+      f_device_resource_code, f_device_channel_name, 
+      f_input_channel_number, f_input_channel_group, 
+      f_device_channel_state, f_operator, f_operate_time
+      )
+    values (#{fInputChannelId,jdbcType=INTEGER}, #{fParameterSetId,jdbcType=INTEGER}, 
+      #{fDeviceResourceCode,jdbcType=VARCHAR}, #{fDeviceChannelName,jdbcType=VARCHAR}, 
+      #{fInputChannelNumber,jdbcType=INTEGER}, #{fInputChannelGroup,jdbcType=INTEGER}, 
+      #{fDeviceChannelState,jdbcType=VARCHAR}, #{fOperator,jdbcType=INTEGER}, #{fOperateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannel" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_input_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fInputChannelId != null" >
+        f_input_channel_id,
+      </if>
+      <if test="fParameterSetId != null" >
+        f_parameter_set_id,
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        f_device_resource_code,
+      </if>
+      <if test="fDeviceChannelName != null" >
+        f_device_channel_name,
+      </if>
+      <if test="fInputChannelNumber != null" >
+        f_input_channel_number,
+      </if>
+      <if test="fInputChannelGroup != null" >
+        f_input_channel_group,
+      </if>
+      <if test="fDeviceChannelState != null" >
+        f_device_channel_state,
+      </if>
+      <if test="fOperator != null" >
+        f_operator,
+      </if>
+      <if test="fOperateTime != null" >
+        f_operate_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fInputChannelId != null" >
+        #{fInputChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fParameterSetId != null" >
+        #{fParameterSetId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        #{fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceChannelName != null" >
+        #{fDeviceChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="fInputChannelNumber != null" >
+        #{fInputChannelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fInputChannelGroup != null" >
+        #{fInputChannelGroup,jdbcType=INTEGER},
+      </if>
+      <if test="fDeviceChannelState != null" >
+        #{fDeviceChannelState,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null" >
+        #{fOperator,jdbcType=INTEGER},
+      </if>
+      <if test="fOperateTime != null" >
+        #{fOperateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannelExample" resultType="java.lang.Integer" >
+    select count(*) from b_device_input_channel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_device_input_channel
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fInputChannelId != null" >
+        f_input_channel_id = #{record.fInputChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fParameterSetId != null" >
+        f_parameter_set_id = #{record.fParameterSetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeviceResourceCode != null" >
+        f_device_resource_code = #{record.fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceChannelName != null" >
+        f_device_channel_name = #{record.fDeviceChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fInputChannelNumber != null" >
+        f_input_channel_number = #{record.fInputChannelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.fInputChannelGroup != null" >
+        f_input_channel_group = #{record.fInputChannelGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeviceChannelState != null" >
+        f_device_channel_state = #{record.fDeviceChannelState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fOperator != null" >
+        f_operator = #{record.fOperator,jdbcType=INTEGER},
+      </if>
+      <if test="record.fOperateTime != null" >
+        f_operate_time = #{record.fOperateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_device_input_channel
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_input_channel_id = #{record.fInputChannelId,jdbcType=INTEGER},
+      f_parameter_set_id = #{record.fParameterSetId,jdbcType=INTEGER},
+      f_device_resource_code = #{record.fDeviceResourceCode,jdbcType=VARCHAR},
+      f_device_channel_name = #{record.fDeviceChannelName,jdbcType=VARCHAR},
+      f_input_channel_number = #{record.fInputChannelNumber,jdbcType=INTEGER},
+      f_input_channel_group = #{record.fInputChannelGroup,jdbcType=INTEGER},
+      f_device_channel_state = #{record.fDeviceChannelState,jdbcType=VARCHAR},
+      f_operator = #{record.fOperator,jdbcType=INTEGER},
+      f_operate_time = #{record.fOperateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannel" >
+    update b_device_input_channel
+    <set >
+      <if test="fInputChannelId != null" >
+        f_input_channel_id = #{fInputChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="fParameterSetId != null" >
+        f_parameter_set_id = #{fParameterSetId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        f_device_resource_code = #{fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceChannelName != null" >
+        f_device_channel_name = #{fDeviceChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="fInputChannelNumber != null" >
+        f_input_channel_number = #{fInputChannelNumber,jdbcType=INTEGER},
+      </if>
+      <if test="fInputChannelGroup != null" >
+        f_input_channel_group = #{fInputChannelGroup,jdbcType=INTEGER},
+      </if>
+      <if test="fDeviceChannelState != null" >
+        f_device_channel_state = #{fDeviceChannelState,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null" >
+        f_operator = #{fOperator,jdbcType=INTEGER},
+      </if>
+      <if test="fOperateTime != null" >
+        f_operate_time = #{fOperateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInputChannel" >
+    update b_device_input_channel
+    set f_input_channel_id = #{fInputChannelId,jdbcType=INTEGER},
+      f_parameter_set_id = #{fParameterSetId,jdbcType=INTEGER},
+      f_device_resource_code = #{fDeviceResourceCode,jdbcType=VARCHAR},
+      f_device_channel_name = #{fDeviceChannelName,jdbcType=VARCHAR},
+      f_input_channel_number = #{fInputChannelNumber,jdbcType=INTEGER},
+      f_input_channel_group = #{fInputChannelGroup,jdbcType=INTEGER},
+      f_device_channel_state = #{fDeviceChannelState,jdbcType=VARCHAR},
+      f_operator = #{fOperator,jdbcType=INTEGER},
+      f_operate_time = #{fOperateTime,jdbcType=TIMESTAMP}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+</mapper>

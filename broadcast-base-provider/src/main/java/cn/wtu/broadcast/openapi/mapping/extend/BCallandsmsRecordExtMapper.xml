@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BCallandsmsRecordExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BCallandsmsRecordVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_telephone_number" property="fTelephoneNumber"
+                jdbcType="VARCHAR"/>
+        <result column="f_control_device" property="fControlDevice"
+                jdbcType="INTEGER"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_area" property="fArea" jdbcType="INTEGER"/>
+        <result column="f_call_time" property="fCallTime" jdbcType="INTEGER"/>
+        <result column="f_telephone_type" property="fTelephoneType"
+                jdbcType="BIT"/>
+        <result column="f_sms_content" property="fSmsContent" jdbcType="VARCHAR"/>
+        <result column="deviceName" property="deviceName" jdbcType="VARCHAR"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="f_audio_url" property="fAudioUrl" jdbcType="VARCHAR"/>
+        <result column="f_name" property="fName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectRCallandsmsRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select b_r.*,b.f_device_name as deviceName
+        from b_callandsms_record b_r
+        LEFT JOIN b_device_info b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        on b_r.f_control_device=b.f_id
+        WHERE b_r.f_delete_flag=0 and b_r.f_telephone_type=#{type}
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            b_r.f_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b_r.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            b_r.f_telephone_number LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_device_name LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        <if test="sortName!=null and sortName!=''">
+            ORDER BY b_r.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

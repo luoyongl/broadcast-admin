@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.BDeviceTerminalStatusQueryMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_device_id" property="fDeviceId" jdbcType="INTEGER" />
+    <result column="f_terminal_volume" property="fTerminalVolume" jdbcType="INTEGER" />
+    <result column="f_local_address" property="fLocalAddress" jdbcType="VARCHAR" />
+    <result column="f_return_address" property="fReturnAddress" jdbcType="VARCHAR" />
+    <result column="f_terminal_resource_code" property="fTerminalResourceCode" jdbcType="VARCHAR" />
+    <result column="f_physical_address_code" property="fPhysicalAddressCode" jdbcType="VARCHAR" />
+    <result column="f_working_condition" property="fWorkingCondition" jdbcType="VARCHAR" />
+    <result column="f_fault_code" property="fFaultCode" jdbcType="VARCHAR" />
+    <result column="f_device_type" property="fDeviceType" jdbcType="VARCHAR" />
+    <result column="f_hardware_version_number" property="fHardwareVersionNumber" jdbcType="VARCHAR" />
+    <result column="f_software_version_number" property="fSoftwareVersionNumber" jdbcType="VARCHAR" />
+    <result column="f_fm_signal_status" property="fFmSignalStatus" jdbcType="VARCHAR" />
+    <result column="f_cable_signal_status" property="fCableSignalStatus" jdbcType="VARCHAR" />
+    <result column="f_ground_wireless_signal_status" property="fGroundWirelessSignalStatus" jdbcType="VARCHAR" />
+    <result column="f_cable_frequency" property="fCableFrequency" jdbcType="VARCHAR" />
+    <result column="f_ground_wireless_frequency" property="fGroundWirelessFrequency" jdbcType="VARCHAR" />
+    <result column="f_fm_frequency_scan_list" property="fFmFrequencyScanList" jdbcType="VARCHAR" />
+    <result column="f_fm_current_frequency_point" property="fFmCurrentFrequencyPoint" jdbcType="VARCHAR" />
+    <result column="f_fm_maintenance_instruction_mode" property="fFmMaintenanceInstructionMode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_device_id, f_terminal_volume, f_local_address, f_return_address, f_terminal_resource_code, 
+    f_physical_address_code, f_working_condition, f_fault_code, f_device_type, f_hardware_version_number, 
+    f_software_version_number, f_fm_signal_status, f_cable_signal_status, f_ground_wireless_signal_status, 
+    f_cable_frequency, f_ground_wireless_frequency, f_fm_frequency_scan_list, f_fm_current_frequency_point, 
+    f_fm_maintenance_instruction_mode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQueryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_device_terminal_status_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_device_terminal_status_query
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_device_terminal_status_query
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQueryExample" >
+    delete from b_device_terminal_status_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_terminal_status_query (f_device_id, f_terminal_volume, f_local_address, 
+      f_return_address, f_terminal_resource_code, 
+      f_physical_address_code, f_working_condition, 
+      f_fault_code, f_device_type, f_hardware_version_number, 
+      f_software_version_number, f_fm_signal_status, 
+      f_cable_signal_status, f_ground_wireless_signal_status, 
+      f_cable_frequency, f_ground_wireless_frequency, 
+      f_fm_frequency_scan_list, f_fm_current_frequency_point, 
+      f_fm_maintenance_instruction_mode)
+    values (#{fDeviceId,jdbcType=INTEGER}, #{fTerminalVolume,jdbcType=INTEGER}, #{fLocalAddress,jdbcType=VARCHAR}, 
+      #{fReturnAddress,jdbcType=VARCHAR}, #{fTerminalResourceCode,jdbcType=VARCHAR}, 
+      #{fPhysicalAddressCode,jdbcType=VARCHAR}, #{fWorkingCondition,jdbcType=VARCHAR}, 
+      #{fFaultCode,jdbcType=VARCHAR}, #{fDeviceType,jdbcType=VARCHAR}, #{fHardwareVersionNumber,jdbcType=VARCHAR}, 
+      #{fSoftwareVersionNumber,jdbcType=VARCHAR}, #{fFmSignalStatus,jdbcType=VARCHAR}, 
+      #{fCableSignalStatus,jdbcType=VARCHAR}, #{fGroundWirelessSignalStatus,jdbcType=VARCHAR}, 
+      #{fCableFrequency,jdbcType=VARCHAR}, #{fGroundWirelessFrequency,jdbcType=VARCHAR}, 
+      #{fFmFrequencyScanList,jdbcType=VARCHAR}, #{fFmCurrentFrequencyPoint,jdbcType=VARCHAR}, 
+      #{fFmMaintenanceInstructionMode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_terminal_status_query
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fDeviceId != null" >
+        f_device_id,
+      </if>
+      <if test="fTerminalVolume != null" >
+        f_terminal_volume,
+      </if>
+      <if test="fLocalAddress != null" >
+        f_local_address,
+      </if>
+      <if test="fReturnAddress != null" >
+        f_return_address,
+      </if>
+      <if test="fTerminalResourceCode != null" >
+        f_terminal_resource_code,
+      </if>
+      <if test="fPhysicalAddressCode != null" >
+        f_physical_address_code,
+      </if>
+      <if test="fWorkingCondition != null" >
+        f_working_condition,
+      </if>
+      <if test="fFaultCode != null" >
+        f_fault_code,
+      </if>
+      <if test="fDeviceType != null" >
+        f_device_type,
+      </if>
+      <if test="fHardwareVersionNumber != null" >
+        f_hardware_version_number,
+      </if>
+      <if test="fSoftwareVersionNumber != null" >
+        f_software_version_number,
+      </if>
+      <if test="fFmSignalStatus != null" >
+        f_fm_signal_status,
+      </if>
+      <if test="fCableSignalStatus != null" >
+        f_cable_signal_status,
+      </if>
+      <if test="fGroundWirelessSignalStatus != null" >
+        f_ground_wireless_signal_status,
+      </if>
+      <if test="fCableFrequency != null" >
+        f_cable_frequency,
+      </if>
+      <if test="fGroundWirelessFrequency != null" >
+        f_ground_wireless_frequency,
+      </if>
+      <if test="fFmFrequencyScanList != null" >
+        f_fm_frequency_scan_list,
+      </if>
+      <if test="fFmCurrentFrequencyPoint != null" >
+        f_fm_current_frequency_point,
+      </if>
+      <if test="fFmMaintenanceInstructionMode != null" >
+        f_fm_maintenance_instruction_mode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fDeviceId != null" >
+        #{fDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fTerminalVolume != null" >
+        #{fTerminalVolume,jdbcType=INTEGER},
+      </if>
+      <if test="fLocalAddress != null" >
+        #{fLocalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fReturnAddress != null" >
+        #{fReturnAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerminalResourceCode != null" >
+        #{fTerminalResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhysicalAddressCode != null" >
+        #{fPhysicalAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fWorkingCondition != null" >
+        #{fWorkingCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="fFaultCode != null" >
+        #{fFaultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceType != null" >
+        #{fDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="fHardwareVersionNumber != null" >
+        #{fHardwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fSoftwareVersionNumber != null" >
+        #{fSoftwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmSignalStatus != null" >
+        #{fFmSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fCableSignalStatus != null" >
+        #{fCableSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fGroundWirelessSignalStatus != null" >
+        #{fGroundWirelessSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fCableFrequency != null" >
+        #{fCableFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="fGroundWirelessFrequency != null" >
+        #{fGroundWirelessFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmFrequencyScanList != null" >
+        #{fFmFrequencyScanList,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmCurrentFrequencyPoint != null" >
+        #{fFmCurrentFrequencyPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmMaintenanceInstructionMode != null" >
+        #{fFmMaintenanceInstructionMode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQueryExample" resultType="java.lang.Integer" >
+    select count(*) from b_device_terminal_status_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_device_terminal_status_query
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeviceId != null" >
+        f_device_id = #{record.fDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fTerminalVolume != null" >
+        f_terminal_volume = #{record.fTerminalVolume,jdbcType=INTEGER},
+      </if>
+      <if test="record.fLocalAddress != null" >
+        f_local_address = #{record.fLocalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fReturnAddress != null" >
+        f_return_address = #{record.fReturnAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTerminalResourceCode != null" >
+        f_terminal_resource_code = #{record.fTerminalResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPhysicalAddressCode != null" >
+        f_physical_address_code = #{record.fPhysicalAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fWorkingCondition != null" >
+        f_working_condition = #{record.fWorkingCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFaultCode != null" >
+        f_fault_code = #{record.fFaultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceType != null" >
+        f_device_type = #{record.fDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fHardwareVersionNumber != null" >
+        f_hardware_version_number = #{record.fHardwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSoftwareVersionNumber != null" >
+        f_software_version_number = #{record.fSoftwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFmSignalStatus != null" >
+        f_fm_signal_status = #{record.fFmSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCableSignalStatus != null" >
+        f_cable_signal_status = #{record.fCableSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fGroundWirelessSignalStatus != null" >
+        f_ground_wireless_signal_status = #{record.fGroundWirelessSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCableFrequency != null" >
+        f_cable_frequency = #{record.fCableFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fGroundWirelessFrequency != null" >
+        f_ground_wireless_frequency = #{record.fGroundWirelessFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFmFrequencyScanList != null" >
+        f_fm_frequency_scan_list = #{record.fFmFrequencyScanList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFmCurrentFrequencyPoint != null" >
+        f_fm_current_frequency_point = #{record.fFmCurrentFrequencyPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fFmMaintenanceInstructionMode != null" >
+        f_fm_maintenance_instruction_mode = #{record.fFmMaintenanceInstructionMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_device_terminal_status_query
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_device_id = #{record.fDeviceId,jdbcType=INTEGER},
+      f_terminal_volume = #{record.fTerminalVolume,jdbcType=INTEGER},
+      f_local_address = #{record.fLocalAddress,jdbcType=VARCHAR},
+      f_return_address = #{record.fReturnAddress,jdbcType=VARCHAR},
+      f_terminal_resource_code = #{record.fTerminalResourceCode,jdbcType=VARCHAR},
+      f_physical_address_code = #{record.fPhysicalAddressCode,jdbcType=VARCHAR},
+      f_working_condition = #{record.fWorkingCondition,jdbcType=VARCHAR},
+      f_fault_code = #{record.fFaultCode,jdbcType=VARCHAR},
+      f_device_type = #{record.fDeviceType,jdbcType=VARCHAR},
+      f_hardware_version_number = #{record.fHardwareVersionNumber,jdbcType=VARCHAR},
+      f_software_version_number = #{record.fSoftwareVersionNumber,jdbcType=VARCHAR},
+      f_fm_signal_status = #{record.fFmSignalStatus,jdbcType=VARCHAR},
+      f_cable_signal_status = #{record.fCableSignalStatus,jdbcType=VARCHAR},
+      f_ground_wireless_signal_status = #{record.fGroundWirelessSignalStatus,jdbcType=VARCHAR},
+      f_cable_frequency = #{record.fCableFrequency,jdbcType=VARCHAR},
+      f_ground_wireless_frequency = #{record.fGroundWirelessFrequency,jdbcType=VARCHAR},
+      f_fm_frequency_scan_list = #{record.fFmFrequencyScanList,jdbcType=VARCHAR},
+      f_fm_current_frequency_point = #{record.fFmCurrentFrequencyPoint,jdbcType=VARCHAR},
+      f_fm_maintenance_instruction_mode = #{record.fFmMaintenanceInstructionMode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+    update b_device_terminal_status_query
+    <set >
+      <if test="fDeviceId != null" >
+        f_device_id = #{fDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fTerminalVolume != null" >
+        f_terminal_volume = #{fTerminalVolume,jdbcType=INTEGER},
+      </if>
+      <if test="fLocalAddress != null" >
+        f_local_address = #{fLocalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fReturnAddress != null" >
+        f_return_address = #{fReturnAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerminalResourceCode != null" >
+        f_terminal_resource_code = #{fTerminalResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhysicalAddressCode != null" >
+        f_physical_address_code = #{fPhysicalAddressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fWorkingCondition != null" >
+        f_working_condition = #{fWorkingCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="fFaultCode != null" >
+        f_fault_code = #{fFaultCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceType != null" >
+        f_device_type = #{fDeviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="fHardwareVersionNumber != null" >
+        f_hardware_version_number = #{fHardwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fSoftwareVersionNumber != null" >
+        f_software_version_number = #{fSoftwareVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmSignalStatus != null" >
+        f_fm_signal_status = #{fFmSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fCableSignalStatus != null" >
+        f_cable_signal_status = #{fCableSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fGroundWirelessSignalStatus != null" >
+        f_ground_wireless_signal_status = #{fGroundWirelessSignalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fCableFrequency != null" >
+        f_cable_frequency = #{fCableFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="fGroundWirelessFrequency != null" >
+        f_ground_wireless_frequency = #{fGroundWirelessFrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmFrequencyScanList != null" >
+        f_fm_frequency_scan_list = #{fFmFrequencyScanList,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmCurrentFrequencyPoint != null" >
+        f_fm_current_frequency_point = #{fFmCurrentFrequencyPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmMaintenanceInstructionMode != null" >
+        f_fm_maintenance_instruction_mode = #{fFmMaintenanceInstructionMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+    update b_device_terminal_status_query
+    set f_device_id = #{fDeviceId,jdbcType=INTEGER},
+      f_terminal_volume = #{fTerminalVolume,jdbcType=INTEGER},
+      f_local_address = #{fLocalAddress,jdbcType=VARCHAR},
+      f_return_address = #{fReturnAddress,jdbcType=VARCHAR},
+      f_terminal_resource_code = #{fTerminalResourceCode,jdbcType=VARCHAR},
+      f_physical_address_code = #{fPhysicalAddressCode,jdbcType=VARCHAR},
+      f_working_condition = #{fWorkingCondition,jdbcType=VARCHAR},
+      f_fault_code = #{fFaultCode,jdbcType=VARCHAR},
+      f_device_type = #{fDeviceType,jdbcType=VARCHAR},
+      f_hardware_version_number = #{fHardwareVersionNumber,jdbcType=VARCHAR},
+      f_software_version_number = #{fSoftwareVersionNumber,jdbcType=VARCHAR},
+      f_fm_signal_status = #{fFmSignalStatus,jdbcType=VARCHAR},
+      f_cable_signal_status = #{fCableSignalStatus,jdbcType=VARCHAR},
+      f_ground_wireless_signal_status = #{fGroundWirelessSignalStatus,jdbcType=VARCHAR},
+      f_cable_frequency = #{fCableFrequency,jdbcType=VARCHAR},
+      f_ground_wireless_frequency = #{fGroundWirelessFrequency,jdbcType=VARCHAR},
+      f_fm_frequency_scan_list = #{fFmFrequencyScanList,jdbcType=VARCHAR},
+      f_fm_current_frequency_point = #{fFmCurrentFrequencyPoint,jdbcType=VARCHAR},
+      f_fm_maintenance_instruction_mode = #{fFmMaintenanceInstructionMode,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+</mapper>

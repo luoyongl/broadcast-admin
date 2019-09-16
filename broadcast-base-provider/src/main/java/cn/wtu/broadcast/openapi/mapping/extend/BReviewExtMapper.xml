@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BReviewExtMapper">
+
+
+    <select id="selectReviewAll" parameterType="java.util.Map" resultType="cn.wtu.broadcast.openapi.vo.BReviewVO">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        br.f_id AS fId,
+        br.f_big_classification AS fBigClassification,
+        br.f_review_type AS fReviewType,
+        br.f_review_object_id AS fReviewObjectId,
+        br.f_review_result AS fReviewResult,
+        br.f_review_time AS fReviewTime,
+        br.f_reviewer AS fReviewer,
+        br.f_remark AS fRemark,
+
+
+        b.f_broadcast_name AS fBroadcastName,
+        b.f_broadcast_type AS fBroadcastType,
+        b.f_control_device AS fControlDevice,
+
+        b.f_message_type AS fMessageType,
+        b.f_volume_control AS fVolumeControl,
+
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        b.f_message_source AS fMessageSource,
+        b.f_sort AS fSort,
+        b_de.f_device_name as fRealControlDevice,
+        b.f_create_time AS fCreateTime,
+        b.f_create_id AS fCreateId,
+        b.f_updtate_time AS fUpdtateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+
+        t_r_review.f_username as reviewer,
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        GROUP_CONCAT(distinct t.f_name) as fRealArea,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMsgresource,
+        a_msg.f_parent_node as fParentNode
+
+
+        FROM
+        b_review br
+        INNER JOIN b_broadcast_data b
+        ON br.f_review_object_id = b.f_id
+
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+
+        LEFT JOIN t_user t_r_review
+        ON br.f_reviewer=t_r_review.f_id
+
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+
+        WHERE b.f_delete_flag=0 AND br.f_review_result!=0
+        GROUP BY br.f_id
+
+        UNION ALL
+
+        SELECT
+        br.f_id AS fId,
+        br.f_big_classification AS fBigClassification,
+        br.f_review_type AS fReviewType,
+        br.f_review_object_id AS freviewObjectId,
+        br.f_review_result AS fReviewResult,
+        br.f_review_time AS fReviewTime,
+        br.f_reviewer AS fReviewer,
+        br.f_remark AS fRemark,
+
+        b.f_plan_name AS fBroadcastName,
+        '12' AS fBroadcastType,
+        b.f_control_device AS fControlDevice,
+        <!-- b_de.f_device_name as fRealControlDevice, -->
+        b.f_message_type AS fMessageType,
+        b.f_volume AS fVolumeControl,
+
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        b.f_message_source AS fMessageSource,
+        b.f_sort AS fSort,
+        b_de.f_device_name as fRealControlDevice,
+        b.f_create_time AS fCreateTime,
+        b.f_create_id AS fCreateId,
+        b.f_update_time AS fUpdtateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+        t_r_review.f_username as reviewer,
+
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        GROUP_CONCAT(t.f_name) as fRealArea,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMsgresource,
+        a_msg.f_parent_node as fParentNode
+
+
+        FROM
+        b_review br
+        INNER JOIN b_broadcast_timing b ON br.f_review_object_id = b.f_id
+
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+        LEFT JOIN t_user t_r_review
+        ON br.f_reviewer=t_r_review.f_id
+
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+
+        WHERE b.f_delete_flag=0 AND br.f_review_result!=0
+        GROUP BY br.f_id
+
+        ) t
+        <!--
+
+        ORDER BY
+            t.fCreateTime DESC -->
+
+        where 1=1
+        <if test="reviewRegion != null and reviewRegion != ''">
+            AND IF(  ${reviewRegion} =0,  `fParentNode` =fParentNode, (fMessageSource=${reviewRegion} or fParentNode=${reviewRegion}) )
+        </if>
+        <if test="searchText != null and searchText != ''">
+            AND (
+            fRealMessageLevel LIKE binary CONCAT('%',#{searchText},'%') or
+            fRealMessageType LIKE binary CONCAT('%',#{searchText},'%') or
+            fRealMsgresource LIKE binary CONCAT('%',#{searchText},'%') or
+            fCreateTime LIKE binary CONCAT('%',#{searchText},'%') or
+            fBigClassification LIKE binary CONCAT('%',#{searchText},'%') or
+            fReviewType LIKE binary CONCAT('%',#{searchText},'%') or
+            freviewObjectId LIKE binary CONCAT('%',#{searchText},'%')
+            )
+        </if>
+        <if test="searchByType !='' and searchByType != null">
+            AND t.fBroadcastType=#{searchByType}
+        </if>
+        <if test=" searchEq !='' and searchEq != null">
+            AND fReviewResult=#{searchEq}
+        </if>
+
+        <if test=" sortName != null and sortOrder != null">
+            ORDER BY t.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+
+    <!-- 直接使用VO映射  -->
+    <!-- 广播数据表、审核处理表、定时广播表的联合查询 -->
+     <select id="selectByAllInfos" parameterType="java.util.Map" resultType="cn.wtu.broadcast.openapi.vo.BReviewVO">
+         SELECT
+         *
+         FROM
+         (
+         SELECT
+         br.f_id AS fId,
+         br.f_big_classification AS fBigClassification,
+         br.f_review_type AS fReviewType,
+         br.f_review_object_id AS fReviewObjectId,
+         br.f_review_result AS fReviewResult,
+         br.f_review_time AS fReviewTime,
+         br.f_reviewer AS fReviewer,
+         br.f_remark AS fRemark,
+
+
+         b.f_broadcast_name AS fBroadcastName,
+         b.f_broadcast_type AS fBroadcastType,
+         b.f_control_device AS fControlDevice,
+         b_de.f_device_name as fRealControlDevice,
+
+         b.f_message_type AS fMessageType,
+         b.f_volume_control AS fVolumeControl,
+
+         b.f_message_level AS fMessageLevel,
+         b.f_broadcast_area AS fBroadcastArea,
+         b.f_message_source AS fMessageSource,
+         b.f_sort AS fSort,
+         b.f_effective_time AS fEffectiveTime,
+         b.f_create_time AS fCreateTime,
+         b.f_create_id AS fCreateId,
+         b.f_updtate_time AS fUpdtateTime,
+         b.f_operator_id AS fOperatorId,
+         b.f_delete_flag AS fDeleteFlag,
+
+
+         t_r_create.f_username as creator,
+         t_r_operate.f_username as operator,
+         t_r_review.f_username as reviewer,
+         t_d.f_dictionary_content as fRealMessageLevel,
+         GROUP_CONCAT(distinct t.f_name) as fRealArea,
+         t_msg.f_dictionary_content as fRealMessageType,
+         a_msg.f_name as fRealMsgresource,
+         a_msg.f_parent_node as fParentNode
+
+
+         FROM
+         b_review br
+         INNER JOIN b_broadcast_data b ON br.f_review_object_id = b.f_id
+
+         LEFT JOIN t_administrative_division t
+         ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+         LEFT JOIN t_administrative_division a_msg
+         ON b.f_message_source=a_msg.f_id
+
+         LEFT JOIN t_user t_r_review
+         ON br.f_reviewer=t_r_review.f_id
+
+         LEFT JOIN t_dictionary t_msg
+         ON b.f_message_type=t_msg.f_id
+
+         LEFT JOIN t_user t_r_create
+         ON b.f_create_id=t_r_create.f_id
+
+         LEFT JOIN b_device_info b_de
+         ON b.f_control_device=b_de.f_id
+
+         LEFT JOIN t_user t_r_operate
+         ON b.f_operator_id=t_r_operate.f_id
+
+         LEFT JOIN t_dictionary t_d
+         ON b.f_message_level=t_d.f_id
+         WHERE b.f_delete_flag=0 AND br.f_review_result=0 and b.f_broadcast_type!=4 and length(trim(b.f_effective_time))>0 AND br.f_review_type!=12
+        GROUP BY br.f_id
+
+         UNION ALL
+
+         SELECT
+         br.f_id AS fId,
+         br.f_big_classification AS fBigClassification,
+         br.f_review_type AS fReviewType,
+          br.f_review_object_id AS freviewObjectId,
+         br.f_review_result AS fReviewResult,
+         br.f_review_time AS fReviewTime,
+         br.f_reviewer AS fReviewer,
+         br.f_remark AS fRemark,
+
+         b.f_plan_name AS fBroadcastName,
+         '12' AS fBroadcastType,
+         b.f_control_device AS fControlDevice,
+         b_de.f_device_name as fRealControlDevice,
+         b.f_message_type AS fMessageType,
+         b.f_volume AS fVolumeControl,
+
+         b.f_message_level AS fMessageLevel,
+         b.f_broadcast_area AS fBroadcastArea,
+         b.f_message_source AS fMessageSource,
+         b.f_sort AS fSort,
+        CONCAT(b.f_start_date," ",b.f_start_time) AS fEffectiveTime,
+         b.f_create_time AS fCreateTime,
+         b.f_create_id AS fCreateId,
+         b.f_update_time AS fUpdtateTime,
+         b.f_operator_id AS fOperatorId,
+         b.f_delete_flag AS fDeleteFlag,
+
+
+         t_r_create.f_username as creator,
+         t_r_operate.f_username as operator,
+         t_r_review.f_username as reviewer,
+         t_d.f_dictionary_content as fRealMessageLevel,
+         GROUP_CONCAT(t.f_name) as fRealArea,
+         t_msg.f_dictionary_content as fRealMessageType,
+         a_msg.f_name as fRealMsgresource,
+         a_msg.f_parent_node as fParentNode
+
+
+         FROM
+         b_review br
+         INNER JOIN b_broadcast_timing b ON br.f_review_object_id = b.f_id
+
+         LEFT JOIN t_administrative_division t
+         ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+         LEFT JOIN t_administrative_division a_msg
+         ON b.f_message_source=a_msg.f_id
+
+         LEFT JOIN t_dictionary t_msg
+         ON b.f_message_type=t_msg.f_id
+
+         LEFT JOIN t_user t_r_create
+         ON b.f_create_id=t_r_create.f_id
+
+
+         LEFT JOIN t_user t_r_review
+         ON br.f_reviewer=t_r_review.f_id
+
+         LEFT JOIN b_device_info b_de
+         ON b.f_control_device=b_de.f_id
+
+         LEFT JOIN t_user t_r_operate
+         ON b.f_operator_id=t_r_operate.f_id
+
+         LEFT JOIN t_dictionary t_d
+         ON b.f_message_level=t_d.f_id
+
+         WHERE b.f_delete_flag=0 AND br.f_review_result=0 AND br.f_review_type=12
+         GROUP BY br.f_id
+
+         ) t
+
+
+         where 1=1
+         <if test="reviewRegion != null and reviewRegion != '' and parentNode != null and parentNode != ''">
+        AND IF(  ${parentNode} =0,  `fParentNode` =fParentNode, (fMessageSource=${reviewRegion} or fParentNode=${reviewRegion}) )
+        </if>
+
+        <if test="searchText != null and searchText != ''">
+            AND (
+            fRealMessageLevel LIKE binary CONCAT('%',#{searchText},'%') or
+            fRealMessageType LIKE binary CONCAT('%',#{searchText},'%') or
+            fRealMsgresource LIKE binary CONCAT('%',#{searchText},'%') or
+            fCreateTime LIKE binary CONCAT('%',#{searchText},'%') or
+            fBigClassification LIKE binary CONCAT('%',#{searchText},'%') or
+            fReviewType LIKE binary CONCAT('%',#{searchText},'%') or
+            freviewObjectId LIKE binary CONCAT('%',#{searchText},'%')
+            )
+        </if>
+        <if test="searchByType !='' and searchByType != null">
+            AND t.fBroadcastType=#{searchByType}
+        </if>
+        <if test=" sortName != null and sortOrder != null">
+            ORDER BY t.${sortName} ${sortOrder}
+        </if>
+
+    </select>
+
+    <!-- 导出表格 -->
+    <select id="selectReviewLogInfos" parameterType="java.util.Map"
+            resultType="cn.wtu.broadcast.openapi.vo.BReviewLogExcelVO">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        br.f_id AS fId,
+        br.f_big_classification AS fBigClassification,
+        br.f_review_type AS fReviewType,
+        br.f_review_object_id AS fReviewObjectId,
+        br.f_review_result AS fReviewResult,
+        br.f_review_time AS fReviewTime,
+        br.f_reviewer AS fReviewer,
+        br.f_remark AS fRemark,
+
+
+        b.f_broadcast_name AS fBroadcastName,
+        b.f_broadcast_type AS fBroadcastType,
+        b.f_control_device AS fControlDevice,
+
+        b.f_message_type AS fMessageType,
+        b.f_volume_control AS fVolumeControl,
+
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        b.f_message_source AS fMessageSource,
+        b.f_sort AS fSort,
+        <!-- b_de.f_device_name as fRealControlDevice, -->
+        b.f_create_time AS fCreateTime,
+        b.f_create_id AS fCreateId,
+        b.f_updtate_time AS fUpdtateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+
+        t_r_review.f_username as reviewer,
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        GROUP_CONCAT(distinct t.f_name) as fRealArea,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMsgresource
+
+
+        FROM
+        b_review br
+        INNER JOIN b_broadcast_data b ON br.f_review_object_id = b.f_id
+
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+
+        LEFT JOIN t_user t_r_review
+        ON br.f_reviewer=t_r_review.f_id
+
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+
+
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+
+        WHERE b.f_delete_flag=0 AND br.f_review_result!=0
+        GROUP BY br.f_id
+
+        UNION ALL
+
+        SELECT
+        br.f_id AS fId,
+        br.f_big_classification AS fBigClassification,
+        br.f_review_type AS fReviewType,
+        br.f_review_object_id AS freviewObjectId,
+        br.f_review_result AS fReviewResult,
+        br.f_review_time AS fReviewTime,
+        br.f_reviewer AS fReviewer,
+        br.f_remark AS fRemark,
+
+        b.f_plan_name AS fBroadcastName,
+        '12' AS fBroadcastType,
+        b.f_control_device AS fControlDevice,
+        <!-- b_de.f_device_name as fRealControlDevice, -->
+        b.f_message_type AS fMessageType,
+        b.f_volume AS fVolumeControl,
+
+        b.f_message_level AS fMessageLevel,
+        b.f_broadcast_area AS fBroadcastArea,
+        b.f_message_source AS fMessageSource,
+        b.f_sort AS fSort,
+        b.f_create_time AS fCreateTime,
+        b.f_create_id AS fCreateId,
+        b.f_update_time AS fUpdtateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+        t_r_review.f_username as reviewer,
+
+        t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+        t_d.f_dictionary_content as fRealMessageLevel,
+        GROUP_CONCAT(t.f_name) as fRealArea,
+        t_msg.f_dictionary_content as fRealMessageType,
+        a_msg.f_name as fRealMsgresource
+
+
+        FROM
+        b_review br
+        INNER JOIN b_broadcast_timing b ON br.f_review_object_id = b.f_id
+
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+
+        LEFT JOIN t_user t_r_review
+        ON br.f_reviewer=t_r_review.f_id
+
+        LEFT JOIN b_device_info b_de
+        ON b.f_control_device=b_de.f_id
+
+        LEFT JOIN t_administrative_division a_msg
+        ON b.f_message_source=a_msg.f_id
+
+        LEFT JOIN t_dictionary t_msg
+        ON b.f_message_type=t_msg.f_id
+
+
+        LEFT JOIN t_user t_r_create
+        ON b.f_create_id=t_r_create.f_id
+
+        LEFT JOIN t_user t_r_operate
+        ON b.f_operator_id=t_r_operate.f_id
+
+        LEFT JOIN t_dictionary t_d
+        ON b.f_message_level=t_d.f_id
+
+        WHERE b.f_delete_flag=0 AND br.f_review_result!=0
+        GROUP BY br.f_id
+
+        ) t
+        ORDER BY
+        fReviewTime DESC
+
+    </select>
+
+</mapper>
+ 
+ 

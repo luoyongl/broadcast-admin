@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="cn.wtu.broadcast.openapi.dao.extend.BDeviceParameterSetExtMapper">
+	<resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceParameterSet" >
+	    <id column="f_id" property="fId" jdbcType="INTEGER" />
+	    <result column="f_device_id" property="fDeviceId" jdbcType="INTEGER" />
+	    <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR" />
+	    <result column="f_adapter_reback_type" property="fAdapterRebackType" jdbcType="TINYINT" />
+	    <result column="f_adapter_reback_cycle" property="fAdapterRebackCycle" jdbcType="INTEGER" />
+	    <result column="f_adapter_reback_address" property="fAdapterRebackAddress" jdbcType="VARCHAR" />
+	    <result column="f_query_code" property="fQueryCode" jdbcType="VARCHAR" />
+	    <result column="f_volume" property="fVolume" jdbcType="TINYINT" />
+	    <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR" />
+	    <result column="f_device_subnet_mask" property="fDeviceSubnetMask" jdbcType="VARCHAR" />
+	    <result column="f_device_gateway" property="fDeviceGateway" jdbcType="VARCHAR" />
+	    <result column="f_device_switch_option" property="fDeviceSwitchOption" jdbcType="TINYINT" />
+	    <result column="f_ts_setting_frequency" property="fTsSettingFrequency" jdbcType="TINYINT" />
+	    <result column="f_ts_setting_symbol_rate" property="fTsSettingSymbolRate" jdbcType="TINYINT" />
+	    <result column="f_ts_setting_qam" property="fTsSettingQam" jdbcType="TINYINT" />
+	    <result column="f_operator" property="fOperator" jdbcType="INTEGER" />
+	    <result column="f_operate_time" property="fOperateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+	<select id="findParameterSet" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from
+		b_device_parameter_set
+		where
+		f_device_resource_code = #{resourceCode}
+	</select>
+	<select id="findDeviceInfo" parameterType="String"
+		resultMap="BaseResultMap">
+		select * from
+		b_device_info
+		where
+		f_device_resource_code = #{resourceCode}
+	</select>
+</mapper>

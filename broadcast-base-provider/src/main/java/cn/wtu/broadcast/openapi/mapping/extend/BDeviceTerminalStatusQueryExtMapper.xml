@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="cn.wtu.broadcast.openapi.dao.extend.BDeviceTerminalStatusQueryExtMapper">
+	<resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceTerminalStatusQuery" >
+	    <id column="f_id" property="fId" jdbcType="INTEGER" />
+	    <result column="f_terminal_volume" property="fTerminalVolume" jdbcType="INTEGER" />
+	    <result column="f_local_address" property="fLocalAddress" jdbcType="VARCHAR" />
+	    <result column="f_return_address" property="fReturnAddress" jdbcType="VARCHAR" />
+	    <result column="f_terminal_resource_code" property="fTerminalResourceCode" jdbcType="VARCHAR" />
+	    <result column="f_physical_address_code" property="fPhysicalAddressCode" jdbcType="VARCHAR" />
+	    <result column="f_working_condition" property="fWorkingCondition" jdbcType="INTEGER" />
+	    <result column="f_fault_code" property="fFaultCode" jdbcType="INTEGER" />
+	    <result column="f_device_type" property="fDeviceType" jdbcType="VARCHAR" />
+	    <result column="f_hardware_version_number" property="fHardwareVersionNumber" jdbcType="VARCHAR" />
+	    <result column="f_software_version_number" property="fSoftwareVersionNumber" jdbcType="VARCHAR" />
+	    <result column="f_fm_signal_status" property="fFmSignalStatus" jdbcType="VARCHAR" />
+	    <result column="f_cable_signal_status" property="fCableSignalStatus" jdbcType="VARCHAR" />
+	    <result column="f_ground_wireless_signal_status" property="fGroundWirelessSignalStatus" jdbcType="VARCHAR" />
+	    <result column="f_cable_frequency" property="fCableFrequency" jdbcType="VARCHAR" />
+	    <result column="f_ground_wireless_frequency" property="fGroundWirelessFrequency" jdbcType="VARCHAR" />
+	    <result column="f_fm_frequency_scan_list" property="fFmFrequencyScanList" jdbcType="VARCHAR" />
+	    <result column="f_fm_current_frequency_point" property="fFmCurrentFrequencyPoint" jdbcType="VARCHAR" />
+	    <result column="f_fm_maintenance_instruction_mode" property="fFmMaintenanceInstructionMode" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+	    f_id, f_terminal_volume, f_local_address, f_return_address, f_terminal_resource_code, 
+	    f_physical_address_code, f_working_condition, f_fault_code, f_device_type, f_hardware_version_number, 
+	    f_software_version_number, f_fm_signal_status, f_cable_signal_status, f_ground_wireless_signal_status, 
+	    f_cable_frequency, f_ground_wireless_frequency, f_fm_frequency_scan_list, f_fm_current_frequency_point, 
+	    f_fm_maintenance_instruction_mode
+	</sql>
+	<select id="findParamResponse" parameterType="string" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from b_device_terminal_status_query
+		where
+		f_terminal_resource_code = #{resourceCode}
+	</select>
+	
+</mapper>

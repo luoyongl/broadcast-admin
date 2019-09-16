@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry location="mysql-connector-java-5.1.22.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 数据库链接URL、用户名、密码 -->
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/broadcast" userId="root"
+			password="123456">
+		</jdbcConnection> -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/broadcast_admin_new_75" userId="root"
+			password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="cn.wtu.broadcast.openapi.model"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的映射文件包名和位置 -->
+		<sqlMapGenerator targetPackage="cn.wtu.broadcast.openapi.mapping"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.wtu.broadcast.openapi.dao" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- <table tableName="b_alarm_record">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_audio_data">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_broadcast_data">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_broadcast_device">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_broadcast_timing">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_callandsms_record">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_certificates">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_device_info">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_device_retrun_info">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_program_channel">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_review">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_server_runtime_info">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_system_info_record">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_update_file">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_whitelist">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_administrative_division">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_alarm_principal">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_dictionary">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_manufacturer">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_operation_log">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_resource">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_role">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_role_and_resource_link">
+			<generatedKey column="f_role_resources_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="t_role_and_user_association">
+			<generatedKey column="f_role_and_user_id" sqlStatement="MySql" identity="true" />
+		</table>-->
+		<table tableName="b_device_return_info">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table> 
+		<!-- <table tableName="b_device_parameter_set">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_device_rds_set">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_device_input_channel">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table tableName="b_device_output_channel">
+			<generatedKey column="f_id" sqlStatement="MySql" identity="true" />
+		</table> -->
+	<!--保留数据lxg  -->	
+	<!-- 	b_device_info        b_device_state_return   b_device_state_return_history  b_program_channel
+            b_broadcast_data     b_broadcast_area        b_broadcast_timing             b_audio_data
+            b_rolling_subtitles  b_picture_ads           b_video_ads                    b_teletext_terminal
+            b_review             t_dictionary            b_regional_features			b_certificates 
+            t_modulation         b_ts_parameter_set      b_broadcast_device             b_update_file-->
+
+	</context>
+</generatorConfiguration>

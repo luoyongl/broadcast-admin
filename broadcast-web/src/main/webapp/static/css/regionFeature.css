@@ -1,0 +1,130 @@
+.btn-operate {
+	margin-right: 10px;
+}
+
+.fileinput-button input {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.tab_modal {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.holder::-webkit-input-placeholder {
+	color: white;
+}
+
+.holder::-moz-placeholder {
+	/* Mozilla Firefox 19+ */
+	color: white;
+}
+
+.holder:-moz-placeholder {
+	/* Mozilla Firefox 4 to 18 */
+	color: white;
+}
+
+.holder:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: white;
+}
+
+.modal table {
+	color: #000000;
+}
+
+.modal-content {
+	background: rgba(30, 160, 248, 1);
+	color: #FFFFFF;
+}
+
+.null {
+	clear: both;
+}
+
+.handle {
+	float: right;
+	margin: 10px;
+}
+
+.show {
+	display: block;
+}
+
+.tab_modal {
+	height: 100%;
+	display: none;
+}
+
+.modal-body-right {
+	padding: 0;
+}
+
+input {
+	color: #FFFFFF!important;
+}
+
+select {
+	color: #FFFFFF!important;
+	width: 60%!important;
+}
+
+option {
+	color: #000000;
+}
+
+.content {
+	position: fixed;
+	height: 99%;
+	width: 99%;
+}
+
+.selectpicker {
+	background: transparent;
+	color: #ffffff;
+}
+
+form {
+	width: 100%;
+}
+
+.pass input {
+	margin: 0 10px;
+}
+
+.form-group {
+	margin: 20px 0px;
+	padding: 0;
+	padding-left: 15px;
+}
+
+.text {
+	border: 1px solid #ccc;
+	height: 322px;
+	width: 800px;
+}
+
+.form-group div {
+	padding: 0!important;
+}
+
+.fixed-table-loading {
+	display: none;
+}
+
+.textarea {
+	resize: none;
+	border: 1;
+	background-color: transparent;
+	/*scrollbar-arrow-color:yellow;
+  				scrollbar-base-color:lightsalmon;
+  				overflow: hidden;*/
+	color: #FFFFFF;
+	height: auto;
+}

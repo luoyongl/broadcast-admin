@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BWhitelistExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BWhitelistVO">
+        <id column="f_id" jdbcType="INTEGER" property="fId"/>
+        <result column="f_name" property="fName" jdbcType="VARCHAR"/>
+        <result column="f_telephone_number" jdbcType="VARCHAR" property="fTelephoneNumber"/>
+        <result column="f_control_device" jdbcType="INTEGER" property="fControlDevice"/>
+        <result column="f_permit" property="fPermit" jdbcType="TINYINT"/>
+        <result column="f_create_time" jdbcType="TIMESTAMP" property="fCreateTime"/>
+        <result column="f_update_time" jdbcType="TIMESTAMP" property="fUpdateTime"/>
+        <result column="f_creator_id" jdbcType="INTEGER" property="fCreatorId"/>
+        <result column="f_operator_id" jdbcType="INTEGER" property="fOperatorId"/>
+        <result column="f_area" jdbcType="VARCHAR" property="fArea"/>
+        <result column="f_delete_flag" jdbcType="BIT" property="fDeleteFlag"/>
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="deviceName" property="deviceName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="BaseResultNewMap" type="cn.wtu.broadcast.openapi.vo.BWhitelistNewVO" >
+	    <id column="f_id" property="fId" jdbcType="INTEGER" />
+	    <result column="f_associated_id" property="fAssociatedId" jdbcType="VARCHAR" />
+	    <result column="f_oper_type" property="fOperType" jdbcType="INTEGER" />
+	    <result column="f_name" property="fName" jdbcType="VARCHAR" />
+	    <result column="f_telephone_number" property="fTelephoneNumber" jdbcType="VARCHAR" />
+	    <result column="f_control_device" property="fControlDevice" jdbcType="INTEGER" />
+	    <result column="f_permit" property="fPermit" jdbcType="TINYINT" />
+	    <result column="f_whitelist_location" property="fWhitelistLocation" jdbcType="INTEGER" />
+	    <result column="f_permission_area_code" property="fPermissionAreaCode" jdbcType="VARCHAR" />
+	    <result column="f_resource_code" property="fResourceCode" jdbcType="VARCHAR" />
+	    <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+	    <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+	    <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+	    <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+	    <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+	    <result column="f_real_area" jdbcType="VARCHAR" property="fRealArea"/>
+	    <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="f_account" property="fAccount" jdbcType="VARCHAR" />
+	    <result column="f_username" property="fUsername" jdbcType="VARCHAR" />
+	    <result column="f_password" property="fPassword" jdbcType="VARCHAR" />
+	    <result column="f_respective_region" property="fRespectiveRegion" jdbcType="INTEGER" />
+	    <result column="f_subordinate_unit" property="fSubordinateUnit" jdbcType="VARCHAR" />
+	    <result column="f_duties" property="fDuties" jdbcType="VARCHAR" />
+	    <result column="f_tel" property="fTel" jdbcType="VARCHAR" />
+	    <result column="f_is_audit_automatic" property="fIsAuditAutomatic" jdbcType="BIT" />
+	    <result column="f_is_linkman" property="fIsLinkman" jdbcType="BIT" />
+	    <result column="f_is_effective" property="fIsEffective" jdbcType="BIT" />
+	</resultMap>
+    <select id="selectwhitelist" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT r.*,b.f_device_name as deviceName
+        from b_whitelist r
+        LEFT JOIN t_administrative_division t
+        ON r.f_area=t.f_id
+        LEFT JOIN b_device_info b
+        on r.f_control_device=b.f_id
+        WHERE r.f_delete_flag=0
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            r.f_name LIKE binary CONCAT('%', #{searchText},'%') or
+            r.f_telephone_number LIKE binary CONCAT('%', #{searchText},'%') or
+            r.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            r.f_update_time LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_device_name LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        GROUP BY r.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY r.${sortName} ${sortOrder}
+        </if>
+    </select>
+    
+    <select id="selectWhiteNewList" parameterType="java.util.Map" resultMap="BaseResultNewMap">
+    	select w.*,
+    	t_r_create.f_username as creator,
+        t_r_operate.f_username as operator,
+    	GROUP_CONCAT(distinct t.f_name) as f_real_area,
+    	t_data.f_account as f_account,
+    	t_data.f_username as f_username,
+    	t_data.f_password as f_password,
+    	t_data.f_respective_region as f_respective_region,
+    	t_data.f_subordinate_unit as f_subordinate_unit,
+    	t_data.f_duties as f_duties,
+    	t_data.f_tel as f_tel,
+    	t_data.f_is_audit_automatic as f_is_audit_automatic,
+    	t_data.f_is_linkman as f_is_linkman,
+    	t_data.f_is_effective as f_is_effective
+    	from b_whitelist w
+    	LEFT JOIN t_user t_data
+    	ON w.f_associated_id = t_data.f_account
+    	LEFT JOIN t_administrative_division t
+    	ON FIND_IN_SET(t.f_id,w.f_permission_area_code)
+    	LEFT JOIN t_user t_r_create
+        ON w.f_creator_id=t_r_create.f_id
+        LEFT JOIN t_user t_r_operate
+        ON w.f_operator_id=t_r_operate.f_id
+        where w.f_delete_flag = 0
+        AND w.f_resource_code = #{resourceCode}
+        GROUP BY w.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY w.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

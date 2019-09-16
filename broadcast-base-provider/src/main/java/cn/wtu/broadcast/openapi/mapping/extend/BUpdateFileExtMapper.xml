@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BUpdateFileExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BUpdateFileVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_file_name" property="fFileName" jdbcType="VARCHAR"/>
+        <result column="f_file_address" property="fFileAddress" jdbcType="VARCHAR"/>
+        <result column="f_manufacturer_number" property="fManufacturerNumber" jdbcType="INTEGER"/>
+        <result column="f_device_type" property="fDeviceType" jdbcType="INTEGER"/>
+        <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_update_flag" property="fUpdateFlag" jdbcType="BIT"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="real_manufacturer_name" property="Realmanufacturer" jdbcType="VARCHAR"/>
+        <result column="real_device" property="Realdevice" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <resultMap id="TsBaseResultMap" type="cn.wtu.broadcast.openapi.vo.BUpdateFileVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_file_name" property="fFileName" jdbcType="VARCHAR"/>
+        <result column="f_file_address" property="fFileAddress" jdbcType="VARCHAR"/>
+        <result column="f_manufacturer_number" property="fManufacturerNumber" jdbcType="INTEGER"/>
+        <result column="f_device_type" property="fDeviceType" jdbcType="INTEGER"/>
+        <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_old_software_version" property="fOldSoftwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_update_flag" property="fUpdateFlag" jdbcType="BIT"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="broadcastArea" property="broadcastArea" jdbcType="BIT"/>
+        <result column="real_manufacturer_name" property="Realmanufacturer" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectTsupdatefile" parameterType="java.util.Map" resultMap="TsBaseResultMap">
+        select b.*,
+        t.f_manufacturer_name as real_manufacturer_name,
+        GROUP_CONCAT(d.f_name) as broadcastArea
+        from b_update_file b
+        left join t_manufacturer t
+        on b.f_manufacturer_number=t.f_id
+        JOIN t_administrative_division d
+		ON FIND_IN_SET(d.f_id,b.f_broadcast_area)
+        WHERE b.f_delete_flag=0 
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            b.f_file_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t.f_manufacturer_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_hardware_version LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_software_version LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_create_time LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        GROUP BY b.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+    
+    <select id="selectupdatefile" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select b.*,
+        t.f_manufacturer_name as real_manufacturer_name,
+        t_d.f_dictionary_content as real_device
+        from b_update_file b
+        left join t_manufacturer t
+        on b.f_manufacturer_number=t.f_id
+        left join t_dictionary t_d
+        on b.f_device_type=t_d.f_id
+        WHERE b.f_delete_flag=0 
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            b.f_file_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t.f_manufacturer_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_hardware_version LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_software_version LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_create_time LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        GROUP BY b.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

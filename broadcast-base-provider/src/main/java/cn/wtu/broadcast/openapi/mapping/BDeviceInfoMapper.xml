@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.BDeviceInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceInfo" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_device_type" property="fDeviceType" jdbcType="TINYINT" />
+    <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR" />
+    <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR" />
+    <result column="f_device_state" property="fDeviceState" jdbcType="VARCHAR" />
+    <result column="f_number" property="fNumber" jdbcType="VARCHAR" />
+    <result column="f_device_image" property="fDeviceImage" jdbcType="VARCHAR" />
+    <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR" />
+    <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR" />
+    <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR" />
+    <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR" />
+    <result column="f_location" property="fLocation" jdbcType="INTEGER" />
+    <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR" />
+    <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR" />
+    <result column="f_dimension" property="fDimension" jdbcType="VARCHAR" />
+    <result column="f_url" property="fUrl" jdbcType="VARCHAR" />
+    <result column="f_enable_state" property="fEnableState" jdbcType="BIT" />
+    <result column="f_device_band" property="fDeviceBand" jdbcType="VARCHAR" />
+    <result column="f_accept_command_pid" property="fAcceptCommandPid" jdbcType="VARCHAR" />
+    <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR" />
+    <result column="f_remark" property="fRemark" jdbcType="VARCHAR" />
+    <result column="f_certificate" property="fCertificate" jdbcType="VARCHAR" />
+    <result column="f_scheme_type" property="fSchemeType" jdbcType="VARCHAR" />
+    <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR" />
+    <result column="f_protocol_type" property="fProtocolType" jdbcType="VARCHAR" />
+    <result column="f_manufacturer_info" property="fManufacturerInfo" jdbcType="VARCHAR" />
+    <result column="f_nvr" property="fNvr" jdbcType="INTEGER" />
+    <result column="f_channel_model" property="fChannelModel" jdbcType="VARCHAR" />
+    <result column="f_login_name" property="fLoginName" jdbcType="VARCHAR" />
+    <result column="f_login_password" property="fLoginPassword" jdbcType="VARCHAR" />
+    <result column="f_channel_content" property="fChannelContent" jdbcType="VARCHAR" />
+    <result column="f_channel_number" property="fChannelNumber" jdbcType="VARCHAR" />
+    <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR" />
+    <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR" />
+    <result column="f_power" property="fPower" jdbcType="VARCHAR" />
+    <result column="f_voltage" property="fVoltage" jdbcType="VARCHAR" />
+    <result column="f_rf_level" property="fRfLevel" jdbcType="VARCHAR" />
+    <result column="f_res_coding" property="fResCoding" jdbcType="VARCHAR" />
+    <result column="f_res_type_code" property="fResTypeCode" jdbcType="VARCHAR" />
+    <result column="f_res_type_sequence_code" property="fResTypeSequenceCode" jdbcType="VARCHAR" />
+    <result column="f_res_subtype_code" property="fResSubtypeCode" jdbcType="VARCHAR" />
+    <result column="f_res_subtype_sequence_code" property="fResSubtypeSequenceCode" jdbcType="VARCHAR" />
+    <result column="f_support_ip_flag" property="fSupportIpFlag" jdbcType="BIT" />
+    <result column="f_support_rds_flag" property="fSupportRdsFlag" jdbcType="BIT" />
+    <result column="f_support_dtmb_ts_flag" property="fSupportDtmbTsFlag" jdbcType="BIT" />
+    <result column="f_support_dvbc_ts_flag" property="fSupportDvbcTsFlag" jdbcType="BIT" />
+    <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+    <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+    <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+    <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+    <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+    <result column="f_back_time" property="fBackTime" jdbcType="TIMESTAMP" />
+    <result column="f_logic_code" property="fLogicCode" jdbcType="VARCHAR" />
+    <result column="f_back_mode" property="fBackMode" jdbcType="VARCHAR" />
+    <result column="f_network_mode" property="fNetworkMode" jdbcType="VARCHAR" />
+    <result column="f_power_current" property="fPowerCurrent" jdbcType="VARCHAR" />
+    <result column="f_broadcast_state" property="fBroadcastState" jdbcType="VARCHAR" />
+    <result column="f_device_volume" property="fDeviceVolume" jdbcType="VARCHAR" />
+    <result column="f_digital_television_radio_mode" property="fDigitalTelevisionRadioMode" jdbcType="VARCHAR" />
+    <result column="f_digital_television_radio_rate" property="fDigitalTelevisionRadioRate" jdbcType="VARCHAR" />
+    <result column="f_qma" property="fQma" jdbcType="VARCHAR" />
+    <result column="f_digital_television_signal_quality" property="fDigitalTelevisionSignalQuality" jdbcType="VARCHAR" />
+    <result column="f_signal_rate_list" property="fSignalRateList" jdbcType="VARCHAR" />
+    <result column="f_signal_strength_list" property="fSignalStrengthList" jdbcType="VARCHAR" />
+    <result column="f_digital_television_signal_strength" property="fDigitalTelevisionSignalStrength" jdbcType="VARCHAR" />
+    <result column="f_code" property="fCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_device_type, f_device_name, f_device_resource_code, f_device_state, f_number, 
+    f_device_image, f_device_ip, f_device_port, f_device_model, f_physical_code, f_location, 
+    f_install_address, f_longitude, f_dimension, f_url, f_enable_state, f_device_band, 
+    f_accept_command_pid, f_display_level, f_remark, f_certificate, f_scheme_type, f_maintainer, 
+    f_protocol_type, f_manufacturer_info, f_nvr, f_channel_model, f_login_name, f_login_password, 
+    f_channel_content, f_channel_number, f_hardware_version, f_software_version, f_power, 
+    f_voltage, f_rf_level, f_res_coding, f_res_type_code, f_res_type_sequence_code, f_res_subtype_code, 
+    f_res_subtype_sequence_code, f_support_ip_flag, f_support_rds_flag, f_support_dtmb_ts_flag, 
+    f_support_dvbc_ts_flag, f_sort, f_create_time, f_creator_id, f_update_time, f_operator_id, 
+    f_delete_flag, f_back_time, f_logic_code, f_back_mode, f_network_mode, f_power_current, 
+    f_broadcast_state, f_device_volume, f_digital_television_radio_mode, f_digital_television_radio_rate, 
+    f_qma, f_digital_television_signal_quality, f_signal_rate_list, f_signal_strength_list, 
+    f_digital_television_signal_strength, f_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_device_info
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_device_info
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfoExample" >
+    delete from b_device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_info (f_device_type, f_device_name, f_device_resource_code, 
+      f_device_state, f_number, f_device_image, 
+      f_device_ip, f_device_port, f_device_model, 
+      f_physical_code, f_location, f_install_address, 
+      f_longitude, f_dimension, f_url, 
+      f_enable_state, f_device_band, f_accept_command_pid, 
+      f_display_level, f_remark, f_certificate, 
+      f_scheme_type, f_maintainer, f_protocol_type, 
+      f_manufacturer_info, f_nvr, f_channel_model, 
+      f_login_name, f_login_password, f_channel_content, 
+      f_channel_number, f_hardware_version, f_software_version, 
+      f_power, f_voltage, f_rf_level, 
+      f_res_coding, f_res_type_code, f_res_type_sequence_code, 
+      f_res_subtype_code, f_res_subtype_sequence_code, 
+      f_support_ip_flag, f_support_rds_flag, f_support_dtmb_ts_flag, 
+      f_support_dvbc_ts_flag, f_sort, f_create_time, 
+      f_creator_id, f_update_time, f_operator_id, 
+      f_delete_flag, f_back_time, f_logic_code, 
+      f_back_mode, f_network_mode, f_power_current, 
+      f_broadcast_state, f_device_volume, f_digital_television_radio_mode, 
+      f_digital_television_radio_rate, f_qma, f_digital_television_signal_quality, 
+      f_signal_rate_list, f_signal_strength_list, f_digital_television_signal_strength, 
+      f_code)
+    values (#{fDeviceType,jdbcType=TINYINT}, #{fDeviceName,jdbcType=VARCHAR}, #{fDeviceResourceCode,jdbcType=VARCHAR}, 
+      #{fDeviceState,jdbcType=VARCHAR}, #{fNumber,jdbcType=VARCHAR}, #{fDeviceImage,jdbcType=VARCHAR}, 
+      #{fDeviceIp,jdbcType=VARCHAR}, #{fDevicePort,jdbcType=VARCHAR}, #{fDeviceModel,jdbcType=VARCHAR}, 
+      #{fPhysicalCode,jdbcType=VARCHAR}, #{fLocation,jdbcType=INTEGER}, #{fInstallAddress,jdbcType=VARCHAR}, 
+      #{fLongitude,jdbcType=VARCHAR}, #{fDimension,jdbcType=VARCHAR}, #{fUrl,jdbcType=VARCHAR}, 
+      #{fEnableState,jdbcType=BIT}, #{fDeviceBand,jdbcType=VARCHAR}, #{fAcceptCommandPid,jdbcType=VARCHAR}, 
+      #{fDisplayLevel,jdbcType=VARCHAR}, #{fRemark,jdbcType=VARCHAR}, #{fCertificate,jdbcType=VARCHAR}, 
+      #{fSchemeType,jdbcType=VARCHAR}, #{fMaintainer,jdbcType=VARCHAR}, #{fProtocolType,jdbcType=VARCHAR}, 
+      #{fManufacturerInfo,jdbcType=VARCHAR}, #{fNvr,jdbcType=INTEGER}, #{fChannelModel,jdbcType=VARCHAR}, 
+      #{fLoginName,jdbcType=VARCHAR}, #{fLoginPassword,jdbcType=VARCHAR}, #{fChannelContent,jdbcType=VARCHAR}, 
+      #{fChannelNumber,jdbcType=VARCHAR}, #{fHardwareVersion,jdbcType=VARCHAR}, #{fSoftwareVersion,jdbcType=VARCHAR}, 
+      #{fPower,jdbcType=VARCHAR}, #{fVoltage,jdbcType=VARCHAR}, #{fRfLevel,jdbcType=VARCHAR}, 
+      #{fResCoding,jdbcType=VARCHAR}, #{fResTypeCode,jdbcType=VARCHAR}, #{fResTypeSequenceCode,jdbcType=VARCHAR}, 
+      #{fResSubtypeCode,jdbcType=VARCHAR}, #{fResSubtypeSequenceCode,jdbcType=VARCHAR}, 
+      #{fSupportIpFlag,jdbcType=BIT}, #{fSupportRdsFlag,jdbcType=BIT}, #{fSupportDtmbTsFlag,jdbcType=BIT}, 
+      #{fSupportDvbcTsFlag,jdbcType=BIT}, #{fSort,jdbcType=TINYINT}, #{fCreateTime,jdbcType=TIMESTAMP}, 
+      #{fCreatorId,jdbcType=INTEGER}, #{fUpdateTime,jdbcType=TIMESTAMP}, #{fOperatorId,jdbcType=INTEGER}, 
+      #{fDeleteFlag,jdbcType=BIT}, #{fBackTime,jdbcType=TIMESTAMP}, #{fLogicCode,jdbcType=VARCHAR}, 
+      #{fBackMode,jdbcType=VARCHAR}, #{fNetworkMode,jdbcType=VARCHAR}, #{fPowerCurrent,jdbcType=VARCHAR}, 
+      #{fBroadcastState,jdbcType=VARCHAR}, #{fDeviceVolume,jdbcType=VARCHAR}, #{fDigitalTelevisionRadioMode,jdbcType=VARCHAR}, 
+      #{fDigitalTelevisionRadioRate,jdbcType=VARCHAR}, #{fQma,jdbcType=VARCHAR}, #{fDigitalTelevisionSignalQuality,jdbcType=VARCHAR}, 
+      #{fSignalRateList,jdbcType=VARCHAR}, #{fSignalStrengthList,jdbcType=VARCHAR}, #{fDigitalTelevisionSignalStrength,jdbcType=VARCHAR}, 
+      #{fCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_device_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fDeviceType != null" >
+        f_device_type,
+      </if>
+      <if test="fDeviceName != null" >
+        f_device_name,
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        f_device_resource_code,
+      </if>
+      <if test="fDeviceState != null" >
+        f_device_state,
+      </if>
+      <if test="fNumber != null" >
+        f_number,
+      </if>
+      <if test="fDeviceImage != null" >
+        f_device_image,
+      </if>
+      <if test="fDeviceIp != null" >
+        f_device_ip,
+      </if>
+      <if test="fDevicePort != null" >
+        f_device_port,
+      </if>
+      <if test="fDeviceModel != null" >
+        f_device_model,
+      </if>
+      <if test="fPhysicalCode != null" >
+        f_physical_code,
+      </if>
+      <if test="fLocation != null" >
+        f_location,
+      </if>
+      <if test="fInstallAddress != null" >
+        f_install_address,
+      </if>
+      <if test="fLongitude != null" >
+        f_longitude,
+      </if>
+      <if test="fDimension != null" >
+        f_dimension,
+      </if>
+      <if test="fUrl != null" >
+        f_url,
+      </if>
+      <if test="fEnableState != null" >
+        f_enable_state,
+      </if>
+      <if test="fDeviceBand != null" >
+        f_device_band,
+      </if>
+      <if test="fAcceptCommandPid != null" >
+        f_accept_command_pid,
+      </if>
+      <if test="fDisplayLevel != null" >
+        f_display_level,
+      </if>
+      <if test="fRemark != null" >
+        f_remark,
+      </if>
+      <if test="fCertificate != null" >
+        f_certificate,
+      </if>
+      <if test="fSchemeType != null" >
+        f_scheme_type,
+      </if>
+      <if test="fMaintainer != null" >
+        f_maintainer,
+      </if>
+      <if test="fProtocolType != null" >
+        f_protocol_type,
+      </if>
+      <if test="fManufacturerInfo != null" >
+        f_manufacturer_info,
+      </if>
+      <if test="fNvr != null" >
+        f_nvr,
+      </if>
+      <if test="fChannelModel != null" >
+        f_channel_model,
+      </if>
+      <if test="fLoginName != null" >
+        f_login_name,
+      </if>
+      <if test="fLoginPassword != null" >
+        f_login_password,
+      </if>
+      <if test="fChannelContent != null" >
+        f_channel_content,
+      </if>
+      <if test="fChannelNumber != null" >
+        f_channel_number,
+      </if>
+      <if test="fHardwareVersion != null" >
+        f_hardware_version,
+      </if>
+      <if test="fSoftwareVersion != null" >
+        f_software_version,
+      </if>
+      <if test="fPower != null" >
+        f_power,
+      </if>
+      <if test="fVoltage != null" >
+        f_voltage,
+      </if>
+      <if test="fRfLevel != null" >
+        f_rf_level,
+      </if>
+      <if test="fResCoding != null" >
+        f_res_coding,
+      </if>
+      <if test="fResTypeCode != null" >
+        f_res_type_code,
+      </if>
+      <if test="fResTypeSequenceCode != null" >
+        f_res_type_sequence_code,
+      </if>
+      <if test="fResSubtypeCode != null" >
+        f_res_subtype_code,
+      </if>
+      <if test="fResSubtypeSequenceCode != null" >
+        f_res_subtype_sequence_code,
+      </if>
+      <if test="fSupportIpFlag != null" >
+        f_support_ip_flag,
+      </if>
+      <if test="fSupportRdsFlag != null" >
+        f_support_rds_flag,
+      </if>
+      <if test="fSupportDtmbTsFlag != null" >
+        f_support_dtmb_ts_flag,
+      </if>
+      <if test="fSupportDvbcTsFlag != null" >
+        f_support_dvbc_ts_flag,
+      </if>
+      <if test="fSort != null" >
+        f_sort,
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time,
+      </if>
+      <if test="fCreatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="fUpdateTime != null" >
+        f_update_time,
+      </if>
+      <if test="fOperatorId != null" >
+        f_operator_id,
+      </if>
+      <if test="fDeleteFlag != null" >
+        f_delete_flag,
+      </if>
+      <if test="fBackTime != null" >
+        f_back_time,
+      </if>
+      <if test="fLogicCode != null" >
+        f_logic_code,
+      </if>
+      <if test="fBackMode != null" >
+        f_back_mode,
+      </if>
+      <if test="fNetworkMode != null" >
+        f_network_mode,
+      </if>
+      <if test="fPowerCurrent != null" >
+        f_power_current,
+      </if>
+      <if test="fBroadcastState != null" >
+        f_broadcast_state,
+      </if>
+      <if test="fDeviceVolume != null" >
+        f_device_volume,
+      </if>
+      <if test="fDigitalTelevisionRadioMode != null" >
+        f_digital_television_radio_mode,
+      </if>
+      <if test="fDigitalTelevisionRadioRate != null" >
+        f_digital_television_radio_rate,
+      </if>
+      <if test="fQma != null" >
+        f_qma,
+      </if>
+      <if test="fDigitalTelevisionSignalQuality != null" >
+        f_digital_television_signal_quality,
+      </if>
+      <if test="fSignalRateList != null" >
+        f_signal_rate_list,
+      </if>
+      <if test="fSignalStrengthList != null" >
+        f_signal_strength_list,
+      </if>
+      <if test="fDigitalTelevisionSignalStrength != null" >
+        f_digital_television_signal_strength,
+      </if>
+      <if test="fCode != null" >
+        f_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fDeviceType != null" >
+        #{fDeviceType,jdbcType=TINYINT},
+      </if>
+      <if test="fDeviceName != null" >
+        #{fDeviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        #{fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceState != null" >
+        #{fDeviceState,jdbcType=VARCHAR},
+      </if>
+      <if test="fNumber != null" >
+        #{fNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceImage != null" >
+        #{fDeviceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceIp != null" >
+        #{fDeviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevicePort != null" >
+        #{fDevicePort,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceModel != null" >
+        #{fDeviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhysicalCode != null" >
+        #{fPhysicalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fLocation != null" >
+        #{fLocation,jdbcType=INTEGER},
+      </if>
+      <if test="fInstallAddress != null" >
+        #{fInstallAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fLongitude != null" >
+        #{fLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="fDimension != null" >
+        #{fDimension,jdbcType=VARCHAR},
+      </if>
+      <if test="fUrl != null" >
+        #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnableState != null" >
+        #{fEnableState,jdbcType=BIT},
+      </if>
+      <if test="fDeviceBand != null" >
+        #{fDeviceBand,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcceptCommandPid != null" >
+        #{fAcceptCommandPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDisplayLevel != null" >
+        #{fDisplayLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fRemark != null" >
+        #{fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fCertificate != null" >
+        #{fCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="fSchemeType != null" >
+        #{fSchemeType,jdbcType=VARCHAR},
+      </if>
+      <if test="fMaintainer != null" >
+        #{fMaintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="fProtocolType != null" >
+        #{fProtocolType,jdbcType=VARCHAR},
+      </if>
+      <if test="fManufacturerInfo != null" >
+        #{fManufacturerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fNvr != null" >
+        #{fNvr,jdbcType=INTEGER},
+      </if>
+      <if test="fChannelModel != null" >
+        #{fChannelModel,jdbcType=VARCHAR},
+      </if>
+      <if test="fLoginName != null" >
+        #{fLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="fLoginPassword != null" >
+        #{fLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fChannelContent != null" >
+        #{fChannelContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fChannelNumber != null" >
+        #{fChannelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fHardwareVersion != null" >
+        #{fHardwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fSoftwareVersion != null" >
+        #{fSoftwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fPower != null" >
+        #{fPower,jdbcType=VARCHAR},
+      </if>
+      <if test="fVoltage != null" >
+        #{fVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="fRfLevel != null" >
+        #{fRfLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fResCoding != null" >
+        #{fResCoding,jdbcType=VARCHAR},
+      </if>
+      <if test="fResTypeCode != null" >
+        #{fResTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResTypeSequenceCode != null" >
+        #{fResTypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResSubtypeCode != null" >
+        #{fResSubtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResSubtypeSequenceCode != null" >
+        #{fResSubtypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fSupportIpFlag != null" >
+        #{fSupportIpFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportRdsFlag != null" >
+        #{fSupportRdsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportDtmbTsFlag != null" >
+        #{fSupportDtmbTsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportDvbcTsFlag != null" >
+        #{fSupportDvbcTsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSort != null" >
+        #{fSort,jdbcType=TINYINT},
+      </if>
+      <if test="fCreateTime != null" >
+        #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatorId != null" >
+        #{fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fUpdateTime != null" >
+        #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperatorId != null" >
+        #{fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeleteFlag != null" >
+        #{fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="fBackTime != null" >
+        #{fBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLogicCode != null" >
+        #{fLogicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fBackMode != null" >
+        #{fBackMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fNetworkMode != null" >
+        #{fNetworkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPowerCurrent != null" >
+        #{fPowerCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="fBroadcastState != null" >
+        #{fBroadcastState,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceVolume != null" >
+        #{fDeviceVolume,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionRadioMode != null" >
+        #{fDigitalTelevisionRadioMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionRadioRate != null" >
+        #{fDigitalTelevisionRadioRate,jdbcType=VARCHAR},
+      </if>
+      <if test="fQma != null" >
+        #{fQma,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionSignalQuality != null" >
+        #{fDigitalTelevisionSignalQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignalRateList != null" >
+        #{fSignalRateList,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignalStrengthList != null" >
+        #{fSignalStrengthList,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionSignalStrength != null" >
+        #{fDigitalTelevisionSignalStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null" >
+        #{fCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfoExample" resultType="java.lang.Integer" >
+    select count(*) from b_device_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_device_info
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeviceType != null" >
+        f_device_type = #{record.fDeviceType,jdbcType=TINYINT},
+      </if>
+      <if test="record.fDeviceName != null" >
+        f_device_name = #{record.fDeviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceResourceCode != null" >
+        f_device_resource_code = #{record.fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceState != null" >
+        f_device_state = #{record.fDeviceState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fNumber != null" >
+        f_number = #{record.fNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceImage != null" >
+        f_device_image = #{record.fDeviceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceIp != null" >
+        f_device_ip = #{record.fDeviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDevicePort != null" >
+        f_device_port = #{record.fDevicePort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceModel != null" >
+        f_device_model = #{record.fDeviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPhysicalCode != null" >
+        f_physical_code = #{record.fPhysicalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLocation != null" >
+        f_location = #{record.fLocation,jdbcType=INTEGER},
+      </if>
+      <if test="record.fInstallAddress != null" >
+        f_install_address = #{record.fInstallAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLongitude != null" >
+        f_longitude = #{record.fLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDimension != null" >
+        f_dimension = #{record.fDimension,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fUrl != null" >
+        f_url = #{record.fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fEnableState != null" >
+        f_enable_state = #{record.fEnableState,jdbcType=BIT},
+      </if>
+      <if test="record.fDeviceBand != null" >
+        f_device_band = #{record.fDeviceBand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fAcceptCommandPid != null" >
+        f_accept_command_pid = #{record.fAcceptCommandPid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDisplayLevel != null" >
+        f_display_level = #{record.fDisplayLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fRemark != null" >
+        f_remark = #{record.fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCertificate != null" >
+        f_certificate = #{record.fCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSchemeType != null" >
+        f_scheme_type = #{record.fSchemeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fMaintainer != null" >
+        f_maintainer = #{record.fMaintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fProtocolType != null" >
+        f_protocol_type = #{record.fProtocolType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fManufacturerInfo != null" >
+        f_manufacturer_info = #{record.fManufacturerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fNvr != null" >
+        f_nvr = #{record.fNvr,jdbcType=INTEGER},
+      </if>
+      <if test="record.fChannelModel != null" >
+        f_channel_model = #{record.fChannelModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLoginName != null" >
+        f_login_name = #{record.fLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fLoginPassword != null" >
+        f_login_password = #{record.fLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fChannelContent != null" >
+        f_channel_content = #{record.fChannelContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fChannelNumber != null" >
+        f_channel_number = #{record.fChannelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fHardwareVersion != null" >
+        f_hardware_version = #{record.fHardwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSoftwareVersion != null" >
+        f_software_version = #{record.fSoftwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPower != null" >
+        f_power = #{record.fPower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fVoltage != null" >
+        f_voltage = #{record.fVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fRfLevel != null" >
+        f_rf_level = #{record.fRfLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fResCoding != null" >
+        f_res_coding = #{record.fResCoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fResTypeCode != null" >
+        f_res_type_code = #{record.fResTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fResTypeSequenceCode != null" >
+        f_res_type_sequence_code = #{record.fResTypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fResSubtypeCode != null" >
+        f_res_subtype_code = #{record.fResSubtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fResSubtypeSequenceCode != null" >
+        f_res_subtype_sequence_code = #{record.fResSubtypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSupportIpFlag != null" >
+        f_support_ip_flag = #{record.fSupportIpFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fSupportRdsFlag != null" >
+        f_support_rds_flag = #{record.fSupportRdsFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fSupportDtmbTsFlag != null" >
+        f_support_dtmb_ts_flag = #{record.fSupportDtmbTsFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fSupportDvbcTsFlag != null" >
+        f_support_dvbc_ts_flag = #{record.fSupportDvbcTsFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fSort != null" >
+        f_sort = #{record.fSort,jdbcType=TINYINT},
+      </if>
+      <if test="record.fCreateTime != null" >
+        f_create_time = #{record.fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fCreatorId != null" >
+        f_creator_id = #{record.fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fUpdateTime != null" >
+        f_update_time = #{record.fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fOperatorId != null" >
+        f_operator_id = #{record.fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeleteFlag != null" >
+        f_delete_flag = #{record.fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fBackTime != null" >
+        f_back_time = #{record.fBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fLogicCode != null" >
+        f_logic_code = #{record.fLogicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBackMode != null" >
+        f_back_mode = #{record.fBackMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fNetworkMode != null" >
+        f_network_mode = #{record.fNetworkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPowerCurrent != null" >
+        f_power_current = #{record.fPowerCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBroadcastState != null" >
+        f_broadcast_state = #{record.fBroadcastState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDeviceVolume != null" >
+        f_device_volume = #{record.fDeviceVolume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDigitalTelevisionRadioMode != null" >
+        f_digital_television_radio_mode = #{record.fDigitalTelevisionRadioMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDigitalTelevisionRadioRate != null" >
+        f_digital_television_radio_rate = #{record.fDigitalTelevisionRadioRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fQma != null" >
+        f_qma = #{record.fQma,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDigitalTelevisionSignalQuality != null" >
+        f_digital_television_signal_quality = #{record.fDigitalTelevisionSignalQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSignalRateList != null" >
+        f_signal_rate_list = #{record.fSignalRateList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSignalStrengthList != null" >
+        f_signal_strength_list = #{record.fSignalStrengthList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fDigitalTelevisionSignalStrength != null" >
+        f_digital_television_signal_strength = #{record.fDigitalTelevisionSignalStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCode != null" >
+        f_code = #{record.fCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_device_info
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_device_type = #{record.fDeviceType,jdbcType=TINYINT},
+      f_device_name = #{record.fDeviceName,jdbcType=VARCHAR},
+      f_device_resource_code = #{record.fDeviceResourceCode,jdbcType=VARCHAR},
+      f_device_state = #{record.fDeviceState,jdbcType=VARCHAR},
+      f_number = #{record.fNumber,jdbcType=VARCHAR},
+      f_device_image = #{record.fDeviceImage,jdbcType=VARCHAR},
+      f_device_ip = #{record.fDeviceIp,jdbcType=VARCHAR},
+      f_device_port = #{record.fDevicePort,jdbcType=VARCHAR},
+      f_device_model = #{record.fDeviceModel,jdbcType=VARCHAR},
+      f_physical_code = #{record.fPhysicalCode,jdbcType=VARCHAR},
+      f_location = #{record.fLocation,jdbcType=INTEGER},
+      f_install_address = #{record.fInstallAddress,jdbcType=VARCHAR},
+      f_longitude = #{record.fLongitude,jdbcType=VARCHAR},
+      f_dimension = #{record.fDimension,jdbcType=VARCHAR},
+      f_url = #{record.fUrl,jdbcType=VARCHAR},
+      f_enable_state = #{record.fEnableState,jdbcType=BIT},
+      f_device_band = #{record.fDeviceBand,jdbcType=VARCHAR},
+      f_accept_command_pid = #{record.fAcceptCommandPid,jdbcType=VARCHAR},
+      f_display_level = #{record.fDisplayLevel,jdbcType=VARCHAR},
+      f_remark = #{record.fRemark,jdbcType=VARCHAR},
+      f_certificate = #{record.fCertificate,jdbcType=VARCHAR},
+      f_scheme_type = #{record.fSchemeType,jdbcType=VARCHAR},
+      f_maintainer = #{record.fMaintainer,jdbcType=VARCHAR},
+      f_protocol_type = #{record.fProtocolType,jdbcType=VARCHAR},
+      f_manufacturer_info = #{record.fManufacturerInfo,jdbcType=VARCHAR},
+      f_nvr = #{record.fNvr,jdbcType=INTEGER},
+      f_channel_model = #{record.fChannelModel,jdbcType=VARCHAR},
+      f_login_name = #{record.fLoginName,jdbcType=VARCHAR},
+      f_login_password = #{record.fLoginPassword,jdbcType=VARCHAR},
+      f_channel_content = #{record.fChannelContent,jdbcType=VARCHAR},
+      f_channel_number = #{record.fChannelNumber,jdbcType=VARCHAR},
+      f_hardware_version = #{record.fHardwareVersion,jdbcType=VARCHAR},
+      f_software_version = #{record.fSoftwareVersion,jdbcType=VARCHAR},
+      f_power = #{record.fPower,jdbcType=VARCHAR},
+      f_voltage = #{record.fVoltage,jdbcType=VARCHAR},
+      f_rf_level = #{record.fRfLevel,jdbcType=VARCHAR},
+      f_res_coding = #{record.fResCoding,jdbcType=VARCHAR},
+      f_res_type_code = #{record.fResTypeCode,jdbcType=VARCHAR},
+      f_res_type_sequence_code = #{record.fResTypeSequenceCode,jdbcType=VARCHAR},
+      f_res_subtype_code = #{record.fResSubtypeCode,jdbcType=VARCHAR},
+      f_res_subtype_sequence_code = #{record.fResSubtypeSequenceCode,jdbcType=VARCHAR},
+      f_support_ip_flag = #{record.fSupportIpFlag,jdbcType=BIT},
+      f_support_rds_flag = #{record.fSupportRdsFlag,jdbcType=BIT},
+      f_support_dtmb_ts_flag = #{record.fSupportDtmbTsFlag,jdbcType=BIT},
+      f_support_dvbc_ts_flag = #{record.fSupportDvbcTsFlag,jdbcType=BIT},
+      f_sort = #{record.fSort,jdbcType=TINYINT},
+      f_create_time = #{record.fCreateTime,jdbcType=TIMESTAMP},
+      f_creator_id = #{record.fCreatorId,jdbcType=INTEGER},
+      f_update_time = #{record.fUpdateTime,jdbcType=TIMESTAMP},
+      f_operator_id = #{record.fOperatorId,jdbcType=INTEGER},
+      f_delete_flag = #{record.fDeleteFlag,jdbcType=BIT},
+      f_back_time = #{record.fBackTime,jdbcType=TIMESTAMP},
+      f_logic_code = #{record.fLogicCode,jdbcType=VARCHAR},
+      f_back_mode = #{record.fBackMode,jdbcType=VARCHAR},
+      f_network_mode = #{record.fNetworkMode,jdbcType=VARCHAR},
+      f_power_current = #{record.fPowerCurrent,jdbcType=VARCHAR},
+      f_broadcast_state = #{record.fBroadcastState,jdbcType=VARCHAR},
+      f_device_volume = #{record.fDeviceVolume,jdbcType=VARCHAR},
+      f_digital_television_radio_mode = #{record.fDigitalTelevisionRadioMode,jdbcType=VARCHAR},
+      f_digital_television_radio_rate = #{record.fDigitalTelevisionRadioRate,jdbcType=VARCHAR},
+      f_qma = #{record.fQma,jdbcType=VARCHAR},
+      f_digital_television_signal_quality = #{record.fDigitalTelevisionSignalQuality,jdbcType=VARCHAR},
+      f_signal_rate_list = #{record.fSignalRateList,jdbcType=VARCHAR},
+      f_signal_strength_list = #{record.fSignalStrengthList,jdbcType=VARCHAR},
+      f_digital_television_signal_strength = #{record.fDigitalTelevisionSignalStrength,jdbcType=VARCHAR},
+      f_code = #{record.fCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfo" >
+    update b_device_info
+    <set >
+      <if test="fDeviceType != null" >
+        f_device_type = #{fDeviceType,jdbcType=TINYINT},
+      </if>
+      <if test="fDeviceName != null" >
+        f_device_name = #{fDeviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceResourceCode != null" >
+        f_device_resource_code = #{fDeviceResourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceState != null" >
+        f_device_state = #{fDeviceState,jdbcType=VARCHAR},
+      </if>
+      <if test="fNumber != null" >
+        f_number = #{fNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceImage != null" >
+        f_device_image = #{fDeviceImage,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceIp != null" >
+        f_device_ip = #{fDeviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevicePort != null" >
+        f_device_port = #{fDevicePort,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceModel != null" >
+        f_device_model = #{fDeviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhysicalCode != null" >
+        f_physical_code = #{fPhysicalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fLocation != null" >
+        f_location = #{fLocation,jdbcType=INTEGER},
+      </if>
+      <if test="fInstallAddress != null" >
+        f_install_address = #{fInstallAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fLongitude != null" >
+        f_longitude = #{fLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="fDimension != null" >
+        f_dimension = #{fDimension,jdbcType=VARCHAR},
+      </if>
+      <if test="fUrl != null" >
+        f_url = #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnableState != null" >
+        f_enable_state = #{fEnableState,jdbcType=BIT},
+      </if>
+      <if test="fDeviceBand != null" >
+        f_device_band = #{fDeviceBand,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcceptCommandPid != null" >
+        f_accept_command_pid = #{fAcceptCommandPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDisplayLevel != null" >
+        f_display_level = #{fDisplayLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fRemark != null" >
+        f_remark = #{fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fCertificate != null" >
+        f_certificate = #{fCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="fSchemeType != null" >
+        f_scheme_type = #{fSchemeType,jdbcType=VARCHAR},
+      </if>
+      <if test="fMaintainer != null" >
+        f_maintainer = #{fMaintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="fProtocolType != null" >
+        f_protocol_type = #{fProtocolType,jdbcType=VARCHAR},
+      </if>
+      <if test="fManufacturerInfo != null" >
+        f_manufacturer_info = #{fManufacturerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fNvr != null" >
+        f_nvr = #{fNvr,jdbcType=INTEGER},
+      </if>
+      <if test="fChannelModel != null" >
+        f_channel_model = #{fChannelModel,jdbcType=VARCHAR},
+      </if>
+      <if test="fLoginName != null" >
+        f_login_name = #{fLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="fLoginPassword != null" >
+        f_login_password = #{fLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fChannelContent != null" >
+        f_channel_content = #{fChannelContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fChannelNumber != null" >
+        f_channel_number = #{fChannelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fHardwareVersion != null" >
+        f_hardware_version = #{fHardwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fSoftwareVersion != null" >
+        f_software_version = #{fSoftwareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="fPower != null" >
+        f_power = #{fPower,jdbcType=VARCHAR},
+      </if>
+      <if test="fVoltage != null" >
+        f_voltage = #{fVoltage,jdbcType=VARCHAR},
+      </if>
+      <if test="fRfLevel != null" >
+        f_rf_level = #{fRfLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fResCoding != null" >
+        f_res_coding = #{fResCoding,jdbcType=VARCHAR},
+      </if>
+      <if test="fResTypeCode != null" >
+        f_res_type_code = #{fResTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResTypeSequenceCode != null" >
+        f_res_type_sequence_code = #{fResTypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResSubtypeCode != null" >
+        f_res_subtype_code = #{fResSubtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fResSubtypeSequenceCode != null" >
+        f_res_subtype_sequence_code = #{fResSubtypeSequenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fSupportIpFlag != null" >
+        f_support_ip_flag = #{fSupportIpFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportRdsFlag != null" >
+        f_support_rds_flag = #{fSupportRdsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportDtmbTsFlag != null" >
+        f_support_dtmb_ts_flag = #{fSupportDtmbTsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSupportDvbcTsFlag != null" >
+        f_support_dvbc_ts_flag = #{fSupportDvbcTsFlag,jdbcType=BIT},
+      </if>
+      <if test="fSort != null" >
+        f_sort = #{fSort,jdbcType=TINYINT},
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time = #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatorId != null" >
+        f_creator_id = #{fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fUpdateTime != null" >
+        f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperatorId != null" >
+        f_operator_id = #{fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeleteFlag != null" >
+        f_delete_flag = #{fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="fBackTime != null" >
+        f_back_time = #{fBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fLogicCode != null" >
+        f_logic_code = #{fLogicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fBackMode != null" >
+        f_back_mode = #{fBackMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fNetworkMode != null" >
+        f_network_mode = #{fNetworkMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPowerCurrent != null" >
+        f_power_current = #{fPowerCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="fBroadcastState != null" >
+        f_broadcast_state = #{fBroadcastState,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeviceVolume != null" >
+        f_device_volume = #{fDeviceVolume,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionRadioMode != null" >
+        f_digital_television_radio_mode = #{fDigitalTelevisionRadioMode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionRadioRate != null" >
+        f_digital_television_radio_rate = #{fDigitalTelevisionRadioRate,jdbcType=VARCHAR},
+      </if>
+      <if test="fQma != null" >
+        f_qma = #{fQma,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionSignalQuality != null" >
+        f_digital_television_signal_quality = #{fDigitalTelevisionSignalQuality,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignalRateList != null" >
+        f_signal_rate_list = #{fSignalRateList,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignalStrengthList != null" >
+        f_signal_strength_list = #{fSignalStrengthList,jdbcType=VARCHAR},
+      </if>
+      <if test="fDigitalTelevisionSignalStrength != null" >
+        f_digital_television_signal_strength = #{fDigitalTelevisionSignalStrength,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null" >
+        f_code = #{fCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfo" >
+    update b_device_info
+    set f_device_type = #{fDeviceType,jdbcType=TINYINT},
+      f_device_name = #{fDeviceName,jdbcType=VARCHAR},
+      f_device_resource_code = #{fDeviceResourceCode,jdbcType=VARCHAR},
+      f_device_state = #{fDeviceState,jdbcType=VARCHAR},
+      f_number = #{fNumber,jdbcType=VARCHAR},
+      f_device_image = #{fDeviceImage,jdbcType=VARCHAR},
+      f_device_ip = #{fDeviceIp,jdbcType=VARCHAR},
+      f_device_port = #{fDevicePort,jdbcType=VARCHAR},
+      f_device_model = #{fDeviceModel,jdbcType=VARCHAR},
+      f_physical_code = #{fPhysicalCode,jdbcType=VARCHAR},
+      f_location = #{fLocation,jdbcType=INTEGER},
+      f_install_address = #{fInstallAddress,jdbcType=VARCHAR},
+      f_longitude = #{fLongitude,jdbcType=VARCHAR},
+      f_dimension = #{fDimension,jdbcType=VARCHAR},
+      f_url = #{fUrl,jdbcType=VARCHAR},
+      f_enable_state = #{fEnableState,jdbcType=BIT},
+      f_device_band = #{fDeviceBand,jdbcType=VARCHAR},
+      f_accept_command_pid = #{fAcceptCommandPid,jdbcType=VARCHAR},
+      f_display_level = #{fDisplayLevel,jdbcType=VARCHAR},
+      f_remark = #{fRemark,jdbcType=VARCHAR},
+      f_certificate = #{fCertificate,jdbcType=VARCHAR},
+      f_scheme_type = #{fSchemeType,jdbcType=VARCHAR},
+      f_maintainer = #{fMaintainer,jdbcType=VARCHAR},
+      f_protocol_type = #{fProtocolType,jdbcType=VARCHAR},
+      f_manufacturer_info = #{fManufacturerInfo,jdbcType=VARCHAR},
+      f_nvr = #{fNvr,jdbcType=INTEGER},
+      f_channel_model = #{fChannelModel,jdbcType=VARCHAR},
+      f_login_name = #{fLoginName,jdbcType=VARCHAR},
+      f_login_password = #{fLoginPassword,jdbcType=VARCHAR},
+      f_channel_content = #{fChannelContent,jdbcType=VARCHAR},
+      f_channel_number = #{fChannelNumber,jdbcType=VARCHAR},
+      f_hardware_version = #{fHardwareVersion,jdbcType=VARCHAR},
+      f_software_version = #{fSoftwareVersion,jdbcType=VARCHAR},
+      f_power = #{fPower,jdbcType=VARCHAR},
+      f_voltage = #{fVoltage,jdbcType=VARCHAR},
+      f_rf_level = #{fRfLevel,jdbcType=VARCHAR},
+      f_res_coding = #{fResCoding,jdbcType=VARCHAR},
+      f_res_type_code = #{fResTypeCode,jdbcType=VARCHAR},
+      f_res_type_sequence_code = #{fResTypeSequenceCode,jdbcType=VARCHAR},
+      f_res_subtype_code = #{fResSubtypeCode,jdbcType=VARCHAR},
+      f_res_subtype_sequence_code = #{fResSubtypeSequenceCode,jdbcType=VARCHAR},
+      f_support_ip_flag = #{fSupportIpFlag,jdbcType=BIT},
+      f_support_rds_flag = #{fSupportRdsFlag,jdbcType=BIT},
+      f_support_dtmb_ts_flag = #{fSupportDtmbTsFlag,jdbcType=BIT},
+      f_support_dvbc_ts_flag = #{fSupportDvbcTsFlag,jdbcType=BIT},
+      f_sort = #{fSort,jdbcType=TINYINT},
+      f_create_time = #{fCreateTime,jdbcType=TIMESTAMP},
+      f_creator_id = #{fCreatorId,jdbcType=INTEGER},
+      f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      f_operator_id = #{fOperatorId,jdbcType=INTEGER},
+      f_delete_flag = #{fDeleteFlag,jdbcType=BIT},
+      f_back_time = #{fBackTime,jdbcType=TIMESTAMP},
+      f_logic_code = #{fLogicCode,jdbcType=VARCHAR},
+      f_back_mode = #{fBackMode,jdbcType=VARCHAR},
+      f_network_mode = #{fNetworkMode,jdbcType=VARCHAR},
+      f_power_current = #{fPowerCurrent,jdbcType=VARCHAR},
+      f_broadcast_state = #{fBroadcastState,jdbcType=VARCHAR},
+      f_device_volume = #{fDeviceVolume,jdbcType=VARCHAR},
+      f_digital_television_radio_mode = #{fDigitalTelevisionRadioMode,jdbcType=VARCHAR},
+      f_digital_television_radio_rate = #{fDigitalTelevisionRadioRate,jdbcType=VARCHAR},
+      f_qma = #{fQma,jdbcType=VARCHAR},
+      f_digital_television_signal_quality = #{fDigitalTelevisionSignalQuality,jdbcType=VARCHAR},
+      f_signal_rate_list = #{fSignalRateList,jdbcType=VARCHAR},
+      f_signal_strength_list = #{fSignalStrengthList,jdbcType=VARCHAR},
+      f_digital_television_signal_strength = #{fDigitalTelevisionSignalStrength,jdbcType=VARCHAR},
+      f_code = #{fCode,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+</mapper>

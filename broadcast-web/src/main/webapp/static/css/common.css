@@ -1,0 +1,182 @@
+html {
+	height: 95%;
+}
+
+
+body {
+	height: 100%;
+}
+			
+form select {
+	color: #FFFFFF!important;
+	width: 60%!important;
+}
+
+.modal select{
+	width: 100%!important;
+}			
+option {
+	color: #000000;
+}
+			
+
+ .content {
+	width: 99%;
+	border: 1px solid #FFFFFF;
+	border-radius: 10px;
+	padding:15px 0;
+
+} 
+			
+.content_table {
+	padding: 1% 1.5%;
+	margin-top: 2.5%;
+	
+	width: 99%;
+	border: 1px solid #FFFFFF;
+	border-radius: 10px;
+	overflow-y: scroll;
+}		
+form {
+	width: 100%;
+}
+.modal input::-webkit-input-placeholder { /* WebKit browsers */
+    color:#ffffff!important;
+    opacity: .5;
+}
+.modal input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:#ffffff;
+}
+.modal input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:#ffffff;
+}
+.modal input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:#ffffff;
+}		
+.pass input {
+	margin: 0 10px;
+}
+			
+.fixed-table-loading {
+	display: none!important;
+}
+
+.right-tree{
+	height: 100%;
+	overflow: auto;
+}
+
+.right-tree ul li span{
+	color: #FFFFFF;
+}
+
+.modal table {
+	color: #000000;
+}
+
+.handle {
+	float: right;
+	margin: 10px;
+}
+/*  .modal-body form input{
+	width:80%!important;
+}  */
+.null {
+	clear: both;
+}
+
+.modal-content {
+	background: rgba(30, 160, 248, 1);
+	color: #FFFFFF;
+}
+.form-group div {
+	padding: 0!important;
+}
+.modal-body {
+	padding: 0;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 5px!important;
+}
+/**
+ * tab闂傚倷绶￠崑鍕囬悽绋课ョ�广儱顦涵锟介梺鏂ユ櫅閸熺増绔熸径宀嬫嫹濞堝灝娅欓柟鍑ゆ嫹
+ */
+/*.driverspan{
+    width: 8%;
+    height: 4px;
+    background: #3197e9;
+    display: block;
+    position: absolute;
+    bottom: -4px;
+ }
+ 
+ .driverspan:after{
+    content: "";
+    border: 10px solid;
+    border-color: transparent  transparent #3197e9 transparent;
+    position: absolute;
+    bottom: 3px;
+    display: block;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.nav.nav-tabs{
+    margin-bottom: 1%;
+    border-bottom: 1px solid #0074D9;
+    position: relative;
+}
+*/
+.nav.nav-tabs{
+	padding: 5px;
+	padding-bottom:0;
+	margin-bottom: 1%;
+}
+.nav.nav-tabs li{
+    text-align: center;
+    background: rgba(255,255,255,.2);
+    padding: 5px;
+	height: 40px;
+	width: 120px;
+	margin: 0 0 5px 10px;
+}
+
+.nav.nav-tabs .selected_tab{
+    background: #5bc0de;
+    border:1px solid #ffffff;
+    border-bottom:transparent;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+}
+.tab_modal{
+    display: none;
+}
+.btn_modal{
+	display: none;
+}
+/* tab_modal闂備礁鎼粔鎾床閼碱剚顫曢柨鐔哄Т閹瑰爼鏌嶉搹瑙勶紓ow濠电偞鍨堕弻銊╊敄閸涱喗娅犻柨鐕傛嫹*/
+.show{
+    display: block;
+}
+
+
+/****/
+.bootstrap-table{
+	color: #FFFFFF;
+}
+.bootstrap-table .selected{
+	background: none;
+}
+.fixed-table-container tbody .selected td {
+	 background-color: transparent !important;
+}
+.bootstrap-table tr:hover{
+	background: none!important;
+}
+
+
+

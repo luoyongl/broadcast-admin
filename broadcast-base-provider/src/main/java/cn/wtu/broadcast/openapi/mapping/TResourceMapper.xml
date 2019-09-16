@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.TResourceMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.TResource" >
+    <id column="f_id" property="fId" jdbcType="INTEGER" />
+    <result column="f_resource_classification" property="fResourceClassification" jdbcType="TINYINT" />
+    <result column="f_resource_name" property="fResourceName" jdbcType="VARCHAR" />
+    <result column="f_parent_resource" property="fParentResource" jdbcType="INTEGER" />
+    <result column="f_resource_path" property="fResourcePath" jdbcType="VARCHAR" />
+    <result column="f_permission_code" property="fPermissionCode" jdbcType="VARCHAR" />
+    <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+    <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+    <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+    <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+    <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+    <result column="f_resource_ico" property="fResourceIco" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, f_resource_classification, f_resource_name, f_parent_resource, f_resource_path, 
+    f_permission_code, f_sort, f_create_time, f_creator_id, f_update_time, f_operator_id, 
+    f_delete_flag, f_resource_ico
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.wtu.broadcast.openapi.model.TResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource
+    where f_id = #{fId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resource
+    where f_id = #{fId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.wtu.broadcast.openapi.model.TResourceExample" >
+    delete from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.wtu.broadcast.openapi.model.TResource" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_resource (f_resource_classification, f_resource_name, 
+      f_parent_resource, f_resource_path, f_permission_code, 
+      f_sort, f_create_time, f_creator_id, 
+      f_update_time, f_operator_id, f_delete_flag, 
+      f_resource_ico)
+    values (#{fResourceClassification,jdbcType=TINYINT}, #{fResourceName,jdbcType=VARCHAR}, 
+      #{fParentResource,jdbcType=INTEGER}, #{fResourcePath,jdbcType=VARCHAR}, #{fPermissionCode,jdbcType=VARCHAR}, 
+      #{fSort,jdbcType=TINYINT}, #{fCreateTime,jdbcType=TIMESTAMP}, #{fCreatorId,jdbcType=INTEGER}, 
+      #{fUpdateTime,jdbcType=TIMESTAMP}, #{fOperatorId,jdbcType=INTEGER}, #{fDeleteFlag,jdbcType=BIT}, 
+      #{fResourceIco,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.model.TResource" >
+    <selectKey resultType="java.lang.Integer" keyProperty="fId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fResourceClassification != null" >
+        f_resource_classification,
+      </if>
+      <if test="fResourceName != null" >
+        f_resource_name,
+      </if>
+      <if test="fParentResource != null" >
+        f_parent_resource,
+      </if>
+      <if test="fResourcePath != null" >
+        f_resource_path,
+      </if>
+      <if test="fPermissionCode != null" >
+        f_permission_code,
+      </if>
+      <if test="fSort != null" >
+        f_sort,
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time,
+      </if>
+      <if test="fCreatorId != null" >
+        f_creator_id,
+      </if>
+      <if test="fUpdateTime != null" >
+        f_update_time,
+      </if>
+      <if test="fOperatorId != null" >
+        f_operator_id,
+      </if>
+      <if test="fDeleteFlag != null" >
+        f_delete_flag,
+      </if>
+      <if test="fResourceIco != null" >
+        f_resource_ico,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fResourceClassification != null" >
+        #{fResourceClassification,jdbcType=TINYINT},
+      </if>
+      <if test="fResourceName != null" >
+        #{fResourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentResource != null" >
+        #{fParentResource,jdbcType=INTEGER},
+      </if>
+      <if test="fResourcePath != null" >
+        #{fResourcePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fPermissionCode != null" >
+        #{fPermissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fSort != null" >
+        #{fSort,jdbcType=TINYINT},
+      </if>
+      <if test="fCreateTime != null" >
+        #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatorId != null" >
+        #{fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fUpdateTime != null" >
+        #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperatorId != null" >
+        #{fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeleteFlag != null" >
+        #{fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="fResourceIco != null" >
+        #{fResourceIco,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.wtu.broadcast.openapi.model.TResourceExample" resultType="java.lang.Integer" >
+    select count(*) from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_resource
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fResourceClassification != null" >
+        f_resource_classification = #{record.fResourceClassification,jdbcType=TINYINT},
+      </if>
+      <if test="record.fResourceName != null" >
+        f_resource_name = #{record.fResourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fParentResource != null" >
+        f_parent_resource = #{record.fParentResource,jdbcType=INTEGER},
+      </if>
+      <if test="record.fResourcePath != null" >
+        f_resource_path = #{record.fResourcePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPermissionCode != null" >
+        f_permission_code = #{record.fPermissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSort != null" >
+        f_sort = #{record.fSort,jdbcType=TINYINT},
+      </if>
+      <if test="record.fCreateTime != null" >
+        f_create_time = #{record.fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fCreatorId != null" >
+        f_creator_id = #{record.fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fUpdateTime != null" >
+        f_update_time = #{record.fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fOperatorId != null" >
+        f_operator_id = #{record.fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDeleteFlag != null" >
+        f_delete_flag = #{record.fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="record.fResourceIco != null" >
+        f_resource_ico = #{record.fResourceIco,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_resource
+    set f_id = #{record.fId,jdbcType=INTEGER},
+      f_resource_classification = #{record.fResourceClassification,jdbcType=TINYINT},
+      f_resource_name = #{record.fResourceName,jdbcType=VARCHAR},
+      f_parent_resource = #{record.fParentResource,jdbcType=INTEGER},
+      f_resource_path = #{record.fResourcePath,jdbcType=VARCHAR},
+      f_permission_code = #{record.fPermissionCode,jdbcType=VARCHAR},
+      f_sort = #{record.fSort,jdbcType=TINYINT},
+      f_create_time = #{record.fCreateTime,jdbcType=TIMESTAMP},
+      f_creator_id = #{record.fCreatorId,jdbcType=INTEGER},
+      f_update_time = #{record.fUpdateTime,jdbcType=TIMESTAMP},
+      f_operator_id = #{record.fOperatorId,jdbcType=INTEGER},
+      f_delete_flag = #{record.fDeleteFlag,jdbcType=BIT},
+      f_resource_ico = #{record.fResourceIco,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.model.TResource" >
+    update t_resource
+    <set >
+      <if test="fResourceClassification != null" >
+        f_resource_classification = #{fResourceClassification,jdbcType=TINYINT},
+      </if>
+      <if test="fResourceName != null" >
+        f_resource_name = #{fResourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentResource != null" >
+        f_parent_resource = #{fParentResource,jdbcType=INTEGER},
+      </if>
+      <if test="fResourcePath != null" >
+        f_resource_path = #{fResourcePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fPermissionCode != null" >
+        f_permission_code = #{fPermissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fSort != null" >
+        f_sort = #{fSort,jdbcType=TINYINT},
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time = #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fCreatorId != null" >
+        f_creator_id = #{fCreatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fUpdateTime != null" >
+        f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fOperatorId != null" >
+        f_operator_id = #{fOperatorId,jdbcType=INTEGER},
+      </if>
+      <if test="fDeleteFlag != null" >
+        f_delete_flag = #{fDeleteFlag,jdbcType=BIT},
+      </if>
+      <if test="fResourceIco != null" >
+        f_resource_ico = #{fResourceIco,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.wtu.broadcast.openapi.model.TResource" >
+    update t_resource
+    set f_resource_classification = #{fResourceClassification,jdbcType=TINYINT},
+      f_resource_name = #{fResourceName,jdbcType=VARCHAR},
+      f_parent_resource = #{fParentResource,jdbcType=INTEGER},
+      f_resource_path = #{fResourcePath,jdbcType=VARCHAR},
+      f_permission_code = #{fPermissionCode,jdbcType=VARCHAR},
+      f_sort = #{fSort,jdbcType=TINYINT},
+      f_create_time = #{fCreateTime,jdbcType=TIMESTAMP},
+      f_creator_id = #{fCreatorId,jdbcType=INTEGER},
+      f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      f_operator_id = #{fOperatorId,jdbcType=INTEGER},
+      f_delete_flag = #{fDeleteFlag,jdbcType=BIT},
+      f_resource_ico = #{fResourceIco,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,29 @@
+.systemUpdate{
+	position: fixed;
+	height: 93%;
+	width: 95%;
+	margin-left: 2.5%;
+	
+	
+	box-sizing: border-box;
+}
+
+
+.form-control{
+	display: none;
+}
+
+.fixed-table-loading{
+	display: none;
+}
+
+.btn-default{
+	display: none;
+}
+
+.bootstrap-table{
+	width: 95%;
+	margin-top: 1%;
+	margin-left: 1%;
+}	
+

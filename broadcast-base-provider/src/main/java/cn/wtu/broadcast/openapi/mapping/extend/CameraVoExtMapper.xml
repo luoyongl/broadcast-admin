@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.CameraVoExtMapper">
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.CameraVo" >
+        <id column="f_id" property="fId" jdbcType="INTEGER" />
+      <result column="f_number" property="fNumber" jdbcType="VARCHAR" />
+      <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR" />
+      <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR" />
+      <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR" />
+      <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR" />
+      <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR" />
+      <result column="f_location" property="fLocation" jdbcType="VARCHAR" />
+      <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR" />
+      <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+      <result column="f_creator_id" property="fCreatorId" jdbcType="VARCHAR" />
+      <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR" />
+      <result column="f_channel_model" property="fChannelModel" jdbcType="VARCHAR" />
+      <result column="f_nvr" property="fNvr" jdbcType="VARCHAR" />
+      <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR" />
+  </resultMap>
+    <select id="selectCameraList" resultMap="BaseResultMap">
+        select
+        b.f_number,
+        b.f_device_name,
+        b.f_device_ip,
+        b.f_device_port,
+        b.f_install_address,
+        b.f_create_time,
+        b.f_channel_model,
+        b.f_nvr,
+        b.f_display_level,
+        b.f_physical_code,
+        u.f_username f_creator_id,
+        t_a.f_name f_location,
+        t.f_dictionary_content f_device_model
+        from b_device_info b
+        left join t_user u
+        on b.f_creator_id = u.f_id
+        left join t_dictionary t
+        on b.f_device_model = t.f_id
+        left join t_administrative_division t_a
+        on b.f_location = t_a.f_id
+        where b.f_device_type = 3 and b.f_delete_flag = 0
+    </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.TResourceExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.TResource">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_resource_classification" property="fResourceClassification" jdbcType="TINYINT"/>
+        <result column="f_resource_name" property="fResourceName" jdbcType="VARCHAR"/>
+        <result column="f_parent_resource" property="fParentResource" jdbcType="INTEGER"/>
+        <result column="f_resource_path" property="fResourcePath" jdbcType="VARCHAR"/>
+        <result column="f_permission_code" property="fPermissionCode" jdbcType="VARCHAR"/>
+        <result column="f_sort" property="fSort" jdbcType="TINYINT"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="f_resource_ico" property="fResourceIco" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select r.f_id,r.f_resource_classification, r.f_resource_name, r.f_parent_resource, r.f_resource_path, r.f_permission_code, r.f_resource_ico
+        from t_resource r
+        left join t_role_and_resource_link rrl on rrl.f_resources_id = r.f_id
+        left join t_role_and_user_association rua on rua.f_role_id = rrl.f_role_id
+        left join t_user u on u.f_id = rua.f_user_id
+        where r.f_delete_flag = 0 and u.f_id = #{userId} and u.f_delete_flag = 0
+        order by r.f_sort
+    </select>
+    <resultMap id="ZTreeMap" type="cn.wtu.broadcast.parent.pojo.ZTree">
+        <id column="f_id" property="id" jdbcType="INTEGER"/>
+        <result column="f_resource_name" property="name" jdbcType="VARCHAR"/>
+        <result column="f_parent_resource" property="pid" jdbcType="INTEGER"/>
+        <result column="f_resource_ico" property="icon" jdbcType="VARCHAR"/>
+        <result column="has_permission" property="checked" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="listAllResource2Ztree" resultMap="ZTreeMap">
+        select f_id,f_resource_name,f_parent_resource
+        from t_resource
+        where f_delete_flag = 0
+        order by f_parent_resource,f_sort
+    </select>
+    <select id="listAllResource2ZtreeByRoleId" resultMap="ZTreeMap">
+        select r.f_id,r.f_resource_name,r.f_parent_resource,if(l.f_role_resources_id is not null,1,null) has_permission
+        from t_resource r
+        left join t_role_and_resource_link l on l.f_resources_id = r.f_id and l.f_role_id = #{roleId}
+        where r.f_delete_flag = 0
+        order by r.f_parent_resource,r.f_sort
+    </select>
+</mapper>

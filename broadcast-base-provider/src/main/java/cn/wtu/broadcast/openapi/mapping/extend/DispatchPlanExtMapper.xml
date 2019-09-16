@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.DispatchPlanExtMapper" >
+  <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.DispatchPlanVO" >
+    <id column="f_id" property="fPlanId" jdbcType="INTEGER" />
+    <result column="f_dispach_name" property="planName" jdbcType="VARCHAR" />
+    <result column="f_describe" property="planDescribe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_dispach_name, f_describe
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_dispatch_plan
+    where f_id = #{fPlanId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_dispatch_plan
+    where f_id = #{fPlanId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="cn.wtu.broadcast.openapi.vo.DispatchPlanVO" >
+    insert into b_dispatch_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fPlanId != null" >
+        f_id,
+      </if>
+      <if test="planName != null" >
+        f_dispach_name,
+      </if>
+      <if test="planDescribe != null" >
+        f_describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fPlanId != null" >
+        #{fPlanId,jdbcType=INTEGER},
+      </if>
+      <if test="planName != null" >
+        #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planDescribe != null" >
+        #{planDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.wtu.broadcast.openapi.vo.DispatchPlanVO" >
+    update b_dispatch_plan
+    <set >
+      <if test="planName != null" >
+        f_dispach_name = #{planName,jdbcType=VARCHAR},
+      </if>
+      <if test="planDescribe != null" >
+        f_describe = #{planDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fPlanId,jdbcType=INTEGER}
+  </update>
+  <select id="selectPlanList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * from b_dispatch_plan 
+    WHERE 1=1
+    <if test="searchText!='' and searchText!=null">
+        AND(
+        f_dispach_name LIKE binary CONCAT('%', #{searchText},'%') or
+        f_describe LIKE binary CONCAT('%', #{searchText},'%') 
+        )
+    </if>
+   </select>
+</mapper>

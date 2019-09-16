@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BVideoAdsExtMapper">
+	<resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BVideoVo">
+		<id column="f_id" property="fId" jdbcType="INTEGER" />
+		<result column="f_video_name" property="fVideoName" jdbcType="VARCHAR" />
+		<result column="f_address" property="fAddress" jdbcType="VARCHAR" />
+		<result column="f_send_all_dates" property="fSendAllDates"
+			jdbcType="BIT" />
+		<result column="f_send_start_date" property="fSendStartDate"
+			jdbcType="DATE" />
+		<result column="f_send_end_date" property="fSendEndDate"
+			jdbcType="DATE" />
+		<result column="f_send_all_times" property="fSendAllTimes"
+			jdbcType="BIT" />
+		<result column="f_send_start_time" property="fSendStartTime"
+			jdbcType="TIME" />
+		<result column="f_send_end_time" property="fSendEndTime"
+			jdbcType="TIME" />
+		<result column="f_broadcast_area" property="fBroadcastArea"
+			jdbcType="VARCHAR" />
+		<result column="f_remark" property="fRemark" jdbcType="VARCHAR" />
+		<result column="f_sort" property="fSort" jdbcType="TINYINT" />
+		<result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+		<result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+		<result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+		<result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+		<result column="f_state" property="fState" jdbcType="VARCHAR" />
+		<result column="f_device" property="fDevice" jdbcType="VARCHAR" />
+		<result column="creator" property="creator" jdbcType="VARCHAR" />
+    	<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="f_resource_codes" property="fResourceCode" jdbcType="VARCHAR" />
+	</resultMap>
+	 <select id="selectVideoAll"  parameterType="java.util.Map" resultMap="BaseResultMap">
+   SELECT b_p.*,
+		t_r_operate.f_username as operator,
+	   t_r_creator.f_username as creator,
+		GROUP_CONCAT(t.f_name) as f_real_area
+	FROM b_video_ads b_p
+	LEFT JOIN t_administrative_division t
+	 	ON b_p.f_broadcast_area=t.f_id
+	LEFT JOIN t_user t_r_operate
+		ON b_p.f_operator_id=t_r_operate.f_id
+	LEFT JOIN t_user t_r_creator
+	   ON b_p.f_creator_id=t_r_creator.f_id
+	where b_p.f_delete_flag=0
+	<if test="searchText!=''and searchText!=null">
+		AND(
+			b_p.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_video_name LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_end_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_start_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_start_date LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_end_date LIKE binary CONCAT('%', #{searchText},'%') or
+			t_r_operate.f_username LIKE binary CONCAT('%', #{searchText},'%')
+		)
+	</if> 
+	GROUP BY b_p.f_id
+	<if test="sortName!=null and sortOrder!=null">
+   		ORDER BY b_p.${sortName} ${sortOrder}
+   	</if>
+	</select>
+	<!-- <select id="selectVideoAll" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT b_p.*,
+		t_r_operate.f_username as operator,
+		GROUP_CONCAT(t.f_name) as f_real_area
+		FROM b_video_ads b_p
+		LEFT JOIN t_administrative_division t
+		ON FIND_IN_SET(t.f_id,b_p.f_broadcast_area)
+		LEFT JOIN t_user t_r_operate
+		ON b_p.f_operator_id=t_r_operate.f_id
+		where b_p.f_delete_flag=0
+	<if test="searchText!='' and searchText!=null">
+			AND(
+			b_p.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_video_name LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_end_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_start_time LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_start_date LIKE binary CONCAT('%', #{searchText},'%') or
+			b_p.f_send_end_date LIKE binary CONCAT('%', #{searchText},'%') or
+			t_r_operate.f_username LIKE binary CONCAT('%', #{searchText},'%')
+			)
+		</if>
+		GROUP BY b_p.f_id
+		<if test="sortName!=null and sortOrder!=null">
+			ORDER BY b_p.${sortName} ${sortOrder}
+		</if>
+	</select> -->
+	
+	 <select id="selectVideoById" resultMap="BaseResultMap">
+   SELECT b_p.*,
+		t_r_create.f_username as creator,
+		t_r_operate.f_username as operator,
+		GROUP_CONCAT(t.f_name) as f_real_area,
+		GROUP_CONCAT(b_t.f_resource_code) as f_resource_codes
+	FROM b_video_ads b_p
+	LEFT JOIN t_administrative_division t
+	ON FIND_IN_SET(t.f_id,b_p.f_broadcast_area)
+	LEFT JOIN b_teletext_terminal b_t
+	ON FIND_IN_SET(b_t.f_terminal_name,b_p.f_device)
+	LEFT JOIN t_user t_r_create
+		 	ON b_p.f_creator_id=t_r_create.f_id
+	LEFT JOIN t_user t_r_operate
+			ON b_p.f_operator_id=t_r_operate.f_id
+	where b_p.f_id=#{fId,jdbcType=INTEGER} and  b_p.f_delete_flag=0
+  </select>
+</mapper>

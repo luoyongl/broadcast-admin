@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BProgramChannelExtMapper" >
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.vo.BProgramChannelVO" >
+        <id column="f_id" property="fId" jdbcType="INTEGER" />
+        <result column="f_pass_number" property="fPassNumber" jdbcType="VARCHAR" />
+        <result column="f_modulation" property="fModulation" jdbcType="VARCHAR" />
+        <result column="f_pass_name" property="fPassName" jdbcType="VARCHAR" />
+        <result column="f_pass_type" property="fPassTypeKey" jdbcType="INTEGER" />
+        <result column="f_value_passtype" property="fPassTypeValue" jdbcType="VARCHAR" />
+        <result column="f_control_device" property="fControlDeviceKey" jdbcType="INTEGER" />
+        <result column="f_value_controlDevice" property="fControlDeviceValue" jdbcType="VARCHAR" />
+        <result column="f_broadcast_area" property="fBroadcastArea" jdbcType="INTEGER" />
+        <result column="f_priority" property="fPriority" jdbcType="TINYINT" />
+        <result column="f_nit_id" property="fNitId" jdbcType="VARCHAR" />
+        <result column="f_pcrp_id" property="fPcrpId" jdbcType="VARCHAR" />
+        <result column="f_service_id" property="fServiceId" jdbcType="VARCHAR" />
+        <result column="f_ts_id" property="fTsId" jdbcType="VARCHAR" />
+        <result column="f_media_type" property="fMediaType" jdbcType="INTEGER" />
+        <result column="f_media_url" property="fMediaUrl" jdbcType="VARCHAR" />
+        <result column="url_value" property="urlValue" jdbcType="VARCHAR" />
+        <result column="f_audio_pid" property="fAudioPid" jdbcType="VARCHAR" />
+        <result column="f_rds_output" property="fRdsOutput" jdbcType="VARCHAR" />
+        <result column="f_output_address" property="fOutputAddress" jdbcType="VARCHAR" />
+        <result column="f_output_port" property="fOutputPort" jdbcType="SMALLINT" />
+        <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <select id="selectProgramList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select b.f_id,b.f_modulation,b.f_pass_number,b.f_pass_name,b.f_pass_type,
+        b.f_control_device,b.f_nit_id,b.f_pcrp_id,
+        b.f_service_id,b.f_ts_id,b.f_media_type,
+        b.f_audio_pid,b.f_rds_output,b.f_output_address,b.f_output_port,
+        b.f_create_time,b.f_creator_id,b.f_update_time,b.f_operator_id
+        ,GROUP_CONCAT(t.f_name) as f_broadcast_area,
+        b_d.f_device_name AS f_value_controlDevice,
+        t_d.f_dictionary_content as f_value_passtype,
+        b_a.f_audio_name AS f_media_url,
+        b_a.f_audio_url AS url_value
+        from b_program_channel b
+        LEFT JOIN t_user
+        on b.f_creator_id = t_user.f_id
+        LEFT JOIN t_administrative_division t
+        ON FIND_IN_SET(t.f_id,b.f_broadcast_area)
+        LEFT JOIN b_device_info b_d ON
+        b_d.f_id = b.f_control_device
+        LEFT JOIN b_audio_data b_a ON
+        b_a.f_audio_url = b.f_media_url
+        LEFT JOIN t_dictionary t_d ON
+        b.f_pass_type=t_d.f_id
+        where b.f_delete_flag = 0
+        <if test="searchText!=''and searchText!=null">
+            AND(
+            b.f_pass_number LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_pass_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_control_device LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_broadcast_area LIKE binary CONCAT('%', #{searchText},'%') or
+            b. f_pass_type LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_media_type LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_update_time LIKE binary CONCAT('%', #{searchText},'%') or
+            t_user.f_username LIKE binary CONCAT('%', #{searchText},'%') or
+            t.f_name LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        GROUP BY b.f_id
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY  b.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

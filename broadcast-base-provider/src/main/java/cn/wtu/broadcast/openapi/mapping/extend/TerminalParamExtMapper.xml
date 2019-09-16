@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.TerminalParamExtMapper">
+    <resultMap id="BaseResultMap"  type="cn.wtu.broadcast.openapi.vo.TerminalParamVO">
+        <id column="f_id" property="fId" jdbcType="INTEGER" />
+        <result column="f_device_id" property="fDeviceId" jdbcType="INTEGER" />
+        <result column="f_fm_receive_rate" property="fFmReceiveRate" jdbcType="VARCHAR" />
+        <result column="f_fm_signal_strength" property="fFmSignalStrength" jdbcType="VARCHAR" />
+        <result column="f_device_type" property="fDeviceType" jdbcType="TINYINT" />
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR" />
+        <result column="f_device_image" property="fDeviceImage" jdbcType="VARCHAR" />
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR" />
+        <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR" />
+        <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR" />
+        <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR" />
+        <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR" />
+        <result column="f_location" property="fLocation" jdbcType="INTEGER" />
+        <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR" />
+        <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR" />
+        <result column="f_dimension" property="fDimension" jdbcType="VARCHAR" />
+        <result column="f_url" property="fUrl" jdbcType="VARCHAR" />
+        <result column="f_enable_state" property="fEnableState" jdbcType="BIT" />
+        <result column="f_device_band" property="fDeviceBand" jdbcType="VARCHAR" />
+        <result column="f_accept_command_pid" property="fAcceptCommandPid" jdbcType="VARCHAR" />
+        <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR" />
+        <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR" />
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR" />
+        <result column="f_certificate" property="fCertificate" jdbcType="VARCHAR" />
+        <result column="f_scheme_type" property="fSchemeType" jdbcType="VARCHAR" />
+        <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR" />
+        <result column="f_protocol_type" property="fProtocolType" jdbcType="VARCHAR" />
+        <result column="f_manufacturer_info" property="fManufacturerInfo" jdbcType="VARCHAR" />
+        <result column="f_nvr" property="fNvr" jdbcType="INTEGER" />
+        <result column="f_channel_model" property="fChannelModel" jdbcType="VARCHAR" />
+        <result column="f_login_name" property="fLoginName" jdbcType="VARCHAR" />
+        <result column="f_login_password" property="fLoginPassword" jdbcType="VARCHAR" />
+        <result column="f_channel_content" property="fChannelContent" jdbcType="VARCHAR" />
+        <result column="f_channel_number" property="fChannelNumber" jdbcType="VARCHAR" />
+        <result column="f_device_state" property="fDeviceState" jdbcType="TINYINT" />
+        <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR" />
+        <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR" />
+        <result column="f_power" property="fPower" jdbcType="VARCHAR" />
+        <result column="f_voltage" property="fVoltage" jdbcType="VARCHAR" />
+        <result column="f_rf_level" property="fRfLevel" jdbcType="VARCHAR" />
+        <result column="f_res_coding" property="fResCoding" jdbcType="VARCHAR" />
+        <result column="f_res_type_code" property="fResTypeCode" jdbcType="VARCHAR" />
+        <result column="f_res_type_sequence_code" property="fResTypeSequenceCode" jdbcType="VARCHAR" />
+        <result column="f_res_subtype_code" property="fResSubtypeCode" jdbcType="VARCHAR" />
+        <result column="f_res_subtype_sequence_code" property="fResSubtypeSequenceCode" jdbcType="VARCHAR" />
+        <result column="f_support_ip_flag" property="fSupportIpFlag" jdbcType="BIT" />
+        <result column="f_support_rds_flag" property="fSupportRdsFlag" jdbcType="BIT" />
+        <result column="f_support_dtmb_ts_flag" property="fSupportDtmbTsFlag" jdbcType="BIT" />
+        <result column="f_support_dvbc_ts_flag" property="fSupportDvbcTsFlag" jdbcType="BIT" />
+        <result column="f_sort" property="fSort" jdbcType="TINYINT" />
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER" />
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER" />
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT" />
+    </resultMap>
+    <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select b_i.*,
+        b_r.f_device_id,
+        b_r.f_fm_receive_rate,
+        b_r.f_fm_signal_strength
+        from b_device_state_return b_r
+        left JOIN b_device_info b_i
+        on b_r.f_device_id=b_i.f_id
+        WHERE b_i.f_delete_flag=0
+        and b_r.f_delete_flag=0
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            b_r.f_fm_receive_rate LIKE binary CONCAT('%', #{searchText},'%') or
+            b_r.f_fm_signal_strength LIKE binary CONCAT('%', #{searchText},'%') or
+            b_i.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b_i.f_power LIKE binary CONCAT('%', #{searchText},'%') or
+            b_i.f_voltage LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        GROUP BY b_r.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b_i.${sortName} ${sortOrder}
+        </if>
+    </select>
+</mapper>

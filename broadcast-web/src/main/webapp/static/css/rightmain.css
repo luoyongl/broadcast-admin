@@ -1,0 +1,25 @@
+/*main样式开始*/
+body{
+	background: rgba(0, 0, 0, 0);
+	background-attachment: fixed;
+}
+@media (min-width:768px) {
+.col-sm-6 {
+	margin-left: 20px;
+	margin-bottom: 30px;
+  }
+}
+@media (min-width: 992px) {
+.col-md-4 {
+    margin-left: 20px;
+	margin-bottom: 30px;
+    float: left;
+    width: 30%;
+  }
+}
+@media (min-width: 1200px) {
+.col-lg-3 {
+	margin-left: 20px;
+	margin-bottom: 30px;
+	width:23%;
+  }

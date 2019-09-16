@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wtu.broadcast.openapi.dao.extend.BDeviceInfoExtMapper">
+    <resultMap id="BaseResultMap" type="cn.wtu.broadcast.openapi.model.BDeviceInfo">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_device_type" property="fDeviceType" jdbcType="TINYINT"/>
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_device_image" property="fDeviceImage" jdbcType="VARCHAR"/>
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR"/>
+        <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR"/>
+        <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR"/>
+        <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR"/>
+        <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR"/>
+        <result column="f_location" property="fLocation" jdbcType="INTEGER"/>
+        <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR"/>
+        <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR"/>
+        <result column="f_dimension" property="fDimension" jdbcType="VARCHAR"/>
+        <result column="f_UFI" property="fUfi" jdbcType="VARCHAR"/>
+        <result column="f_device_state" property="fDeviceState" jdbcType="VARCHAR"/>
+        <result column="f_device_band" property="fDeviceBand" jdbcType="VARCHAR"/>
+        <result column="f_accept_command_pid" property="fAcceptCommandPid" jdbcType="VARCHAR"/>
+        <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR"/>
+        <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR"/>
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR"/>
+        <result column="f_certificate" property="fCertificate" jdbcType="VARCHAR"/>
+        <result column="f_scheme_type" property="fSchemeType" jdbcType="VARCHAR"/>
+        <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR"/>
+        <result column="f_protocol_type" property="fProtocolType" jdbcType="VARCHAR"/>
+        <result column="f_manufacturer_info" property="fManufacturerInfo" jdbcType="VARCHAR"/>
+        <result column="f_nvr" property="fNvr" jdbcType="INTEGER"/>
+        <result column="f_channel_model" property="fChannelModel" jdbcType="VARCHAR"/>
+        <result column="f_login_name" property="fLoginName" jdbcType="VARCHAR"/>
+        <result column="f_login_password" property="fLoginPassword" jdbcType="VARCHAR"/>
+        <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_power" property="fPower" jdbcType="VARCHAR"/>
+        <result column="f_power_current" property="fPowerCurrent" jdbcType="VARCHAR"/>
+        <result column="f_signal_strength_list" property="fSignalStrength" jdbcType="VARCHAR"/>
+        <result column="f_voltage" property="fVoltage" jdbcType="VARCHAR"/>
+        <result column="f_rf_level" property="fRfLevel" jdbcType="VARCHAR"/>
+        <result column="f_res_coding" property="fResCoding" jdbcType="VARCHAR"/>
+        <result column="f_res_type_code" property="fResTypeCode" jdbcType="VARCHAR"/>
+        <result column="f_res_type_sequence_code" property="fResTypeSequenceCode" jdbcType="VARCHAR"/>
+        <result column="f_res_subtype_code" property="fResSubtypeCode" jdbcType="VARCHAR"/>
+        <result column="f_res_subtype_sequence_code" property="fResSubtypeSequenceCode" jdbcType="VARCHAR"/>
+        <result column="f_support_ip_flag" property="fSupportIpFlag" jdbcType="BIT"/>
+        <result column="f_support_rds_flag" property="fSupportRdsFlag" jdbcType="BIT"/>
+        <result column="f_support_dtmb_ts_flag" property="fSupportDtmbTsFlag" jdbcType="BIT"/>
+        <result column="f_support_dvbc_ts_flag" property="fSupportDvbcTsFlag" jdbcType="BIT"/>
+        <result column="f_sort" property="fSort" jdbcType="TINYINT"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_back_time" property="fBackTime" jdbcType="TIMESTAMP"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+    </resultMap>
+
+<resultMap id="AdapterResult" type="cn.wtu.broadcast.openapi.vo.BAdapterInfo">
+        <result column="f_id" property="fId" jdbcType="INTEGER"/>        
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR"/>
+</resultMap>
+
+    <resultMap id="FrontAndTerminalDeviceMap" type="cn.wtu.broadcast.openapi.vo.BDeviceInfoVo">
+        <id column="f_id" property="fId" jdbcType="INTEGER"/>
+        <result column="f_device_type" property="fDeviceType" jdbcType="TINYINT"/>
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_device_image" property="fDeviceImage" jdbcType="VARCHAR"/>
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR"/>
+        <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR"/>
+        <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR"/>
+        <result column="f_device_model" property="fDeviceModel" jdbcType="VARCHAR"/>
+        <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR"/>
+        <result column="f_location" property="fLocation" jdbcType="INTEGER"/>
+        <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR"/>
+        <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR"/>
+        <result column="f_dimension" property="fDimension" jdbcType="VARCHAR"/>
+        <result column="f_url" property="fUrl" jdbcType="VARCHAR"/>
+        <result column="f_enable_state" property="fEnableState" jdbcType="BIT"/>
+        <result column="f_device_band" property="fDeviceBand" jdbcType="VARCHAR"/>
+        <result column="f_accept_command_pid" property="fAcceptCommandPid" jdbcType="VARCHAR"/>
+        <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR"/>
+        <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR"/>
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR"/>
+        <result column="f_certificate" property="fCertificate" jdbcType="VARCHAR"/>
+        <result column="f_scheme_type" property="fSchemeType" jdbcType="VARCHAR"/>
+        <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR"/>
+        <result column="f_protocol_type" property="fProtocolType" jdbcType="VARCHAR"/>
+        <result column="f_manufacturer_info" property="fManufacturerInfo" jdbcType="VARCHAR"/>
+        <result column="f_nvr" property="fNvr" jdbcType="INTEGER"/>
+        <result column="f_channel_model" property="fChannelModel" jdbcType="VARCHAR"/>
+        <result column="f_login_name" property="fLoginName" jdbcType="VARCHAR"/>
+        <result column="f_login_password" property="fLoginPassword" jdbcType="VARCHAR"/>
+        <result column="f_channel_content" property="fChannelContent" jdbcType="VARCHAR"/>
+        <result column="f_channel_number" property="fChannelNumber" jdbcType="VARCHAR"/>
+        <result column="f_device_state" property="fDeviceState" jdbcType="TINYINT"/>
+        <result column="f_hardware_version" property="fHardwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_software_version" property="fSoftwareVersion" jdbcType="VARCHAR"/>
+        <result column="f_power" property="fPower" jdbcType="VARCHAR"/>
+        <result column="f_voltage" property="fVoltage" jdbcType="VARCHAR"/>
+        <result column="f_rf_level" property="fRfLevel" jdbcType="VARCHAR"/>
+        <result column="f_res_coding" property="fResCoding" jdbcType="VARCHAR"/>
+        <result column="f_res_type_code" property="fResTypeCode" jdbcType="VARCHAR"/>
+        <result column="f_res_type_sequence_code" property="fResTypeSequenceCode" jdbcType="VARCHAR"/>
+        <result column="f_res_subtype_code" property="fResSubtypeCode" jdbcType="VARCHAR"/>
+        <result column="f_res_subtype_sequence_code" property="fResSubtypeSequenceCode" jdbcType="VARCHAR"/>
+        <result column="f_support_ip_flag" property="fSupportIpFlag" jdbcType="BIT"/>
+        <result column="f_support_rds_flag" property="fSupportRdsFlag" jdbcType="BIT"/>
+        <result column="f_support_dtmb_ts_flag" property="fSupportDtmbTsFlag" jdbcType="BIT"/>
+        <result column="f_support_dvbc_ts_flag" property="fSupportDvbcTsFlag" jdbcType="BIT"/>
+        <result column="f_sort" property="fSort" jdbcType="TINYINT"/>
+        <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="f_back_time" property="fBackTime" jdbcType="TIMESTAMP"/>
+        <result column="f_logic_code" property="fLogicCode" jdbcType="VARCHAR"/>
+        <result column="f_back_mode" property="fBackMode" jdbcType="VARCHAR"/>
+        <result column="f_network_mode" property="fNetworkMode" jdbcType="VARCHAR"/>
+        <result column="f_power_current" property="fPowerCurrent" jdbcType="VARCHAR"/>
+        <result column="f_broadcast_state" property="fBroadcastState" jdbcType="VARCHAR"/>
+        <result column="f_device_volume" property="fDeviceVolume" jdbcType="VARCHAR"/>
+        <result column="f_digital_television_radio_mode" property="fDigitalTelevisionRadioMode" jdbcType="VARCHAR"/>
+        <result column="f_digital_television_radio_rate" property="fDigitalTelevisionRadioRate" jdbcType="VARCHAR"/>
+        <result column="f_qma" property="fQma" jdbcType="VARCHAR"/>
+        <result column="f_digital_television_signal_quality" property="fDigitalTelevisionSignalQuality"
+                jdbcType="VARCHAR"/>
+        <result column="f_signal_rate_list" property="fSignalRateList" jdbcType="VARCHAR"/>
+        <result column="f_signal_strength_list" property="fSignalStrengthList" jdbcType="VARCHAR"/>
+        <result column="f_digital_television_signal_strength" property="fDigitalTelevisionSignalStrength"
+                jdbcType="VARCHAR"/>
+        <result column="f_creator_id" property="fCreatorId" jdbcType="INTEGER"/>
+        <result column="f_update_time" property="fUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="f_operator_id" property="fOperatorId" jdbcType="INTEGER"/>
+        <result column="f_delete_flag" property="fDeleteFlag" jdbcType="BIT"/>
+        <result column="f_device_state" property="fDeviceState" jdbcType="BIT"/>
+        <result column="f_value_device_model" property="fRealDeviceModel"
+                jdbcType="VARCHAR"/>
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR"/>
+        <result column="f_real_facture" property="fRealFacture" jdbcType="VARCHAR"/>
+        <result column="f_creatorName" property="fCreatorName" jdbcType="VARCHAR"/>
+        <result column="f_operatorName" property="fOperatorName" jdbcType="VARCHAR"/>
+        <result column="f_real_protocolType" property="fRealProtocol" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ExportFrontDeviceMap" type="cn.wtu.broadcast.openapi.vo.FrontDeviceExportVO">
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR"/>
+        <result column="f_value_device_model" property="fRealDeviceModel"
+                jdbcType="VARCHAR"/>
+        <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR"/>
+        <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR"/>
+        <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR"/>
+        <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR"/>
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR"/>
+        <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR"/>
+        <result column="f_url" property="fUrl" jdbcType="VARCHAR"/>
+        <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR"/>
+        <result column="f_dimension" property="fDimension" jdbcType="VARCHAR"/>
+        <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR"/>
+        <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR"/>
+        <result column="f_real_protocolType" property="fRealProtocol" jdbcType="VARCHAR"/>
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR"/>
+        <!-- <result column="f_real_facture" property="fRealFacture" jdbcType="VARCHAR" /> -->
+    </resultMap>
+
+    <resultMap id="ExportTerminalDeviceMap" type="cn.wtu.broadcast.openapi.vo.TerminalDeviceExportVO">
+        <result column="f_number" property="fNumber" jdbcType="VARCHAR"/>
+        <result column="f_device_name" property="fDeviceName" jdbcType="VARCHAR"/>
+        <result column="f_value_device_model" property="fRealDeviceModel"
+                jdbcType="VARCHAR"/>
+        <result column="f_device_ip" property="fDeviceIp" jdbcType="VARCHAR"/>
+        <result column="f_device_port" property="fDevicePort" jdbcType="VARCHAR"/>
+        <result column="f_physical_code" property="fPhysicalCode" jdbcType="VARCHAR"/>
+        <result column="f_device_resource_code" property="fDeviceResourceCode" jdbcType="VARCHAR"/>
+        <result column="f_real_area" property="fRealArea" jdbcType="VARCHAR"/>
+        <result column="f_install_address" property="fInstallAddress" jdbcType="VARCHAR"/>
+        <result column="f_url" property="fUrl" jdbcType="VARCHAR"/>
+        <result column="f_longitude" property="fLongitude" jdbcType="VARCHAR"/>
+        <result column="f_dimension" property="fDimension" jdbcType="VARCHAR"/>
+        <result column="f_display_level" property="fDisplayLevel" jdbcType="VARCHAR"/>
+        <result column="f_maintainer" property="fMaintainer" jdbcType="VARCHAR"/>
+        <result column="f_real_protocolType" property="fRealProtocol" jdbcType="VARCHAR"/>
+        <result column="f_remark" property="fRemark" jdbcType="VARCHAR"/>
+        <result column="f_real_facture" property="fRealFacture" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectDeviceList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select b_device_info.* from b_device_info LEFT JOIN t_user on
+        b_device_info.f_creator_id = t_user.f_id
+        where b_device_info.f_delete_flag = 0
+        and b_device_info.f_device_type = #{type}
+        <if test="searchText!=''and searchText!=null">
+            AND(
+            b_device_info.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_device_model LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_device_ip LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_device_port LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_location LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_install_address LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_update_time LIKE binary CONCAT('%', #{searchText},'%') or
+            t_user.f_username LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY b_device_info.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+    <select id="selectDeviceforhandle" parameterType="java.util.Map" resultMap="FrontAndTerminalDeviceMap">
+        select b_device_info.*,
+        t_d.f_dictionary_content AS f_value_device_model,
+        t_a.f_name AS f_real_area
+        from b_device_info
+        LEFT JOIN t_dictionary t_d ON
+        b_device_info.f_device_model = t_d.f_id
+        LEFT JOIN t_administrative_division t_a
+        ON b_device_info.f_location=t_a.f_id
+        where b_device_info.f_delete_flag = 0
+        and ( b_device_info.f_device_type = #{type1} or
+        b_device_info.f_device_type = #{type2})
+        <if test="searchText!='' and searchText!=null">
+            AND(
+            b_device_info.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_device_ip LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_device_resource_code LIKE binary CONCAT('%', #{searchText},'%') or
+            b_device_info.f_physical_code LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        group by b_device_info.f_id
+        <if test="sortName!=null and sortOrder!=null">
+            ORDER BY b_device_info.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+    <select id="listUserDevice" resultType="java.util.HashMap">
+        SELECT b.f_id fId,b.f_device_name fDeviceName,b.f_physical_code fPhysicalCode,b.f_install_address fInstallAddress,
+        b.f_longitude fLongitude,b.f_dimension fDimension,f_device_resource_code fDeviceResourceCode,b.f_device_state fDeviceState,f_back_mode fBackMode,d.f_name region
+        FROM b_device_info b
+        LEFT JOIN t_administrative_division d ON d.f_id = b.f_location
+        WHERE b.f_delete_flag = 0 AND (b.f_device_type = 0 OR (b.f_device_type = 1 AND b.f_enable_state = 1))
+        AND FIND_IN_SET(b.f_location,getSubRegion(#{regionId}))
+    </select>
+
+    <select id="selectfrontAndTerminalDeviceList" parameterType="java.util.Map" resultMap="FrontAndTerminalDeviceMap">
+        select b.*,
+        t_d.f_dictionary_content AS f_value_device_model,
+        t_m.f_manufacturer_name AS f_real_facture,
+        t_user.f_username AS f_creatorName,
+        t_op.f_username AS f_operatorName,
+        t_a.f_name AS f_real_area,
+        GROUP_CONCAT(distinct t_protocol.f_dictionary_content) as f_real_protocolType
+        from b_device_info b
+        LEFT JOIN t_user on
+        b.f_creator_id = t_user.f_id
+        LEFT JOIN t_user t_op on
+        b.f_operator_id = t_op.f_id
+        LEFT JOIN t_dictionary t_d ON
+        b.f_device_model = t_d.f_id
+        LEFT JOIN t_administrative_division t_a
+        ON b.f_location=t_a.f_id
+        LEFT JOIN t_manufacturer t_m
+        ON t_m.f_manufacturer_no=b.f_manufacturer_info
+        LEFT JOIN
+        t_dictionary t_protocol
+        ON FIND_IN_SET(t_protocol.f_id,b.f_protocol_type)
+        where b.f_delete_flag = 0 and (b.f_device_type = 0 or b.f_device_type = 1)
+        <if test="divisions!=null and divisions!='' and divisions.length > 0">
+        	and b.f_location in
+        	<foreach collection="divisions" index="index" item="division" separator="," open="(" close=")">
+        		#{division}
+        	</foreach>
+        </if>
+        <if test="deviceType!=null and deviceType!=''">
+            and b.f_device_type = #{deviceType}
+        </if>
+        <if test="state!=null and state!=''">
+            and (b.f_device_state = #{state} or b.f_device_state =0)
+        </if>
+        <if test="exception!=null and exception!=''">
+            and b.f_device_state != 0 and b.f_device_state != 1
+        </if>
+        <if test="searchText!=''and searchText!=null">
+            AND(
+            b.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_device_resource_code LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%', #{searchText},'%') or
+            t_a.f_name LIKE binary CONCAT('%', #{searchText},'%'
+            ) or
+            t_m.f_manufacturer_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_update_time LIKE binary CONCAT('%', #{searchText},'%') or
+            t_user.f_username LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        group by b.f_id
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+    <select id="exportFrontDeviceInfo" parameterType="java.util.Map" resultMap="ExportFrontDeviceMap">
+        SELECT
+        b.f_number,
+        b.f_device_name,
+        t_d.f_dictionary_content AS f_value_device_model,
+        b.f_device_ip,
+        b.f_device_port,
+        b.f_physical_code,
+        b.f_device_resource_code,
+        t_a.f_name AS f_real_area,
+        b.f_install_address,
+        b.f_url,
+        b.f_longitude,
+        b.f_dimension,
+        b.f_display_level,
+        b.f_maintainer,
+        GROUP_CONCAT(distinct t_protocol.f_dictionary_content) as f_real_protocolType,
+        b.f_remark
+        <!-- t_m.f_manufacturer_name AS f_real_facture, -->
+        FROM
+        b_device_info b
+        LEFT JOIN t_dictionary t_d ON b.f_device_model = t_d.f_id
+        LEFT JOIN t_administrative_division t_a ON b.f_location = t_a.f_id
+        LEFT JOIN
+        t_dictionary t_protocol
+        ON FIND_IN_SET(t_protocol.f_id,b.f_protocol_type)
+        WHERE
+        b.f_delete_flag = 0
+        AND b.f_device_type = 0
+        GROUP BY
+        b.f_id
+    </select>
+
+    <select id="exportTerminalDeviceInfo" parameterType="java.util.Map" resultMap="ExportTerminalDeviceMap">
+       SELECT
+		b.f_number,
+		b.f_device_name,
+		t_d.f_dictionary_content AS f_value_device_model,
+		b.f_device_ip,
+		b.f_device_port,
+		b.f_physical_code,
+		b.f_device_resource_code,
+		t_a.f_name AS f_real_area,
+		b.f_install_address,
+		b.f_url,
+		b.f_longitude,
+		b.f_dimension,
+		b.f_display_level,
+		b.f_maintainer,
+		GROUP_CONCAT(distinct t_protocol.f_dictionary_content) as f_real_protocolType,
+		b.f_remark,
+		 t_m.f_manufacturer_name AS f_real_facture
+		FROM
+			b_device_info b
+			LEFT JOIN t_dictionary t_d ON b.f_device_model = t_d.f_id
+			LEFT JOIN t_administrative_division t_a ON b.f_location = t_a.f_id
+			LEFT JOIN t_manufacturer t_m ON t_m.f_manufacturer_no = b.f_manufacturer_info
+			LEFT JOIN
+			t_dictionary t_protocol
+			ON FIND_IN_SET(t_protocol.f_id,b.f_protocol_type)
+			WHERE
+			b.f_delete_flag = 0
+			AND b.f_device_type = 1
+			GROUP BY
+			b.f_id
+    </select>
+
+    <!-- 查询异常设备信息 -->
+    <select id="selectExceptionDeviceInfos" parameterType="java.util.Map"
+            resultType="cn.wtu.broadcast.openapi.vo.BDeviceInfoVo">
+        SELECT
+        b.f_id AS fId,
+        b.f_number AS fNumber,
+        b.f_device_image AS fDeviceImage,
+        b.f_device_name AS fDeviceName,
+        b.f_device_ip AS fDeviceIp,
+        b.f_device_port AS fDevicePort,
+        b.f_device_model AS fDeviceModel,
+        b.f_physical_code AS fPhysicalCode,
+        b.f_location AS fLocation,
+        b.f_install_address AS fInstallAddress,
+        b.f_longitude AS fLongitude,
+        b.f_dimension AS fDimension,
+        b.f_url AS fUrl,
+        b.f_enable_state AS fEnableState,
+        b.f_device_band AS fDeviceBand,
+        b.f_accept_command_pid AS fAcceptCommandPid,
+        b.f_display_level AS fDisplayLevel,
+        b.f_device_resource_code AS fDeviceResourceCode,
+        b.f_remark AS fRemark,
+        b.f_certificate AS fCertificate,
+        b.f_scheme_type AS fSchemeType,
+        b.f_maintainer AS fMaintainer,
+        b.f_protocol_type AS fProtocolType,
+        b.f_manufacturer_info AS fManufacturerInfo,
+        b.f_nvr AS fNvr,
+        b.f_channel_model AS fChannelModel,
+        b.f_login_name AS fLoginName,
+        b.f_login_password AS fLoginPassword,
+        b.f_channel_content AS fChannelContent,
+        b.f_channel_number AS fChannelNumber,
+        b.f_device_state AS fDeviceState,
+        b.f_hardware_version AS fHardwareVersion,
+        b.f_software_version AS fSoftwareVersion,
+        b.f_power AS fPower,
+        b.f_voltage AS fVoltage,
+        b.f_rf_level AS fRfLevel,
+        b.f_res_coding AS fResCoding,
+        b.f_res_type_code AS fResTypeCode,
+        b.f_res_type_sequence_code AS fResTypeSequenceCode,
+        b.f_res_subtype_code AS fResSubtypeCode,
+        b.f_res_subtype_sequence_code AS fResSubtypeSequenceCode,
+        b.f_support_ip_flag AS fSupportIpFlag,
+        b.f_support_rds_flag AS fSupportRdsFlag,
+        b.f_support_dtmb_ts_flag AS fSupportDtmbTsFlag,
+        b.f_support_dvbc_ts_flag AS fSupportDvbcTsFlag,
+        b.f_sort AS fSort,
+        b.f_create_time AS fCreateTime,
+        b.f_creator_id AS fCreatorId,
+        b.f_update_time AS fUpdateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+
+        t_user.f_username AS fCreatorName,
+        t_a.f_name AS fRealArea,
+        t_d.f_dictionary_content AS fRealDeviceModel,
+        t_m.f_manufacturer_name AS fRealFacture,
+        GROUP_CONCAT(distinct t_protocol.f_dictionary_content) as fRealProtocol
+        FROM b_device_info b
+        LEFT JOIN t_user on
+        b.f_creator_id = t_user.f_id
+        LEFT JOIN t_dictionary t_d ON
+        b.f_device_model = t_d.f_id
+        LEFT JOIN t_administrative_division t_a
+        ON b.f_location=t_a.f_id
+        LEFT JOIN t_manufacturer t_m
+        ON t_m.f_manufacturer_no=b.f_manufacturer_info
+        LEFT JOIN t_dictionary t_protocol
+        ON FIND_IN_SET(t_protocol.f_id,b.f_protocol_type)
+        WHERE b.f_device_type IN(0, 1) and b.f_delete_flag=0 and b.f_code="01" and f_device_state IN(2, 3, 4)
+
+        <if test="searchText!=''and searchText!=null">
+            AND(
+            b.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%', #{searchText},'%') or
+            t_a.f_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t_m.f_manufacturer_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            t_user.f_username LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        group by b.f_id
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if>
+    </select>
+
+
+    <!-- 查询异常设备信息 -->
+    <select id="queryExceptionDeviceInfos" resultType="cn.wtu.broadcast.openapi.vo.ExceptionDeviceExportVO">
+        SELECT
+        b.f_id AS fId,
+        b.f_number AS fNumber,
+        b.f_device_image AS fDeviceImage,
+        b.f_device_name AS fDeviceName,
+        b.f_device_ip AS fDeviceIp,
+        b.f_device_port AS fDevicePort,
+        b.f_device_model AS fDeviceModel,
+        b.f_physical_code AS fPhysicalCode,
+        b.f_location AS fLocation,
+        b.f_install_address AS fInstallAddress,
+        b.f_longitude AS fLongitude,
+        b.f_dimension AS fDimension,
+        b.f_url AS fUrl,
+        b.f_enable_state AS fEnableState,
+        b.f_device_band AS fDeviceBand,
+        b.f_accept_command_pid AS fAcceptCommandPid,
+        b.f_display_level AS fDisplayLevel,
+        b.f_device_resource_code AS fDeviceResourceCode,
+        b.f_remark AS fRemark,
+        b.f_certificate AS fCertificate,
+        b.f_scheme_type AS fSchemeType,
+        b.f_maintainer AS fMaintainer,
+        b.f_protocol_type AS fProtocolType,
+        b.f_manufacturer_info AS fManufacturerInfo,
+        b.f_nvr AS fNvr,
+        b.f_channel_model AS fChannelModel,
+        b.f_login_name AS fLoginName,
+        b.f_login_password AS fLoginPassword,
+        b.f_channel_content AS fChannelContent,
+        b.f_channel_number AS fChannelNumber,
+        b.f_device_state AS fDeviceState,
+        b.f_hardware_version AS fHardwareVersion,
+        b.f_software_version AS fSoftwareVersion,
+        b.f_power AS fPower,
+        b.f_voltage AS fVoltage,
+        b.f_rf_level AS fRfLevel,
+        b.f_res_coding AS fResCoding,
+        b.f_res_type_code AS fResTypeCode,
+        b.f_res_type_sequence_code AS fResTypeSequenceCode,
+        b.f_res_subtype_code AS fResSubtypeCode,
+        b.f_res_subtype_sequence_code AS fResSubtypeSequenceCode,
+        b.f_support_ip_flag AS fSupportIpFlag,
+        b.f_support_rds_flag AS fSupportRdsFlag,
+        b.f_support_dtmb_ts_flag AS fSupportDtmbTsFlag,
+        b.f_support_dvbc_ts_flag AS fSupportDvbcTsFlag,
+        b.f_sort AS fSort,
+        b.f_create_time AS fCreateTime,
+        b.f_creator_id AS fCreatorId,
+        b.f_update_time AS fUpdateTime,
+        b.f_operator_id AS fOperatorId,
+        b.f_delete_flag AS fDeleteFlag,
+        b.f_device_state AS fDeviceState,
+
+        t_user.f_username AS fCreatorName,
+        t_a.f_name AS fRealArea,
+        t_d.f_dictionary_content AS fRealDeviceModel,
+        t_m.f_manufacturer_name AS fRealFacture,
+        GROUP_CONCAT(distinct t_protocol.f_dictionary_content) as fRealProtocol
+        FROM b_device_info b
+        LEFT JOIN t_user on
+        b.f_creator_id = t_user.f_id
+        LEFT JOIN t_dictionary t_d ON
+        b.f_device_model = t_d.f_id
+        LEFT JOIN t_administrative_division t_a
+        ON b.f_location=t_a.f_id
+        LEFT JOIN t_manufacturer t_m
+        ON t_m.f_manufacturer_no=b.f_manufacturer_info
+        LEFT JOIN t_dictionary t_protocol
+        ON FIND_IN_SET(t_protocol.f_id,b.f_protocol_type)
+        WHERE b.f_device_type IN(0, 1) AND b.f_code="01" AND b.f_delete_flag=0 AND f_device_state IN(2, 3, 4)
+
+        <!-- <if test="searchText!=''and searchText!=null">
+            AND(
+            b.f_device_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_id LIKE binary CONCAT('%', #{searchText},'%') or
+            t_d.f_dictionary_content LIKE binary CONCAT('%', #{searchText},'%') or
+            t_a.f_name LIKE binary CONCAT('%', #{searchText},'%') or
+            t_m.f_manufacturer_name LIKE binary CONCAT('%', #{searchText},'%') or
+            b.f_create_time LIKE binary CONCAT('%', #{searchText},'%') or
+            t_user.f_username LIKE binary CONCAT('%', #{searchText},'%')
+            )
+        </if>
+        <if test="sortName!=null and sortOrder!=null and sortName!=''">
+            ORDER BY b.${sortName} ${sortOrder}
+        </if> -->
+        group by b.f_id
+    </select>
+    <update id="updateAllDeceiveState" parameterType="cn.wtu.broadcast.openapi.model.BDeviceInfo">
+    	UPDATE b_device_info SET f_device_state = 2 where f_delete_flag = 0
+  </update>
+  
+  <select id="getDeviceByResourceId"  resultType="Integer">
+      select f_id from b_device_info where f_location in
+      <foreach collection="list" index="index" item="resourceId" open="(" separator="," close=")">
+              #{resourceId}       
+       </foreach>   
+       and f_code = 01 and f_device_state in (0,1) and f_delete_flag = 0 
+  </select>
+  
+  <!--查询出所有 正在广播和在线的设备(0,1)  用于省平台测试时的设备展示   2019-04-10  lxg   -->
+  <select id="getAllDevices"  resultType="Integer">
+       select f_id from b_device_info where f_code = 01 and f_device_state in (0,1) and f_delete_flag = 0 
+  </select>
+  
+   <select id="selectCameraDevices" resultMap="BaseResultMap">
+        select * from b_device_info 
+        where b_device_info.f_delete_flag = 0
+        and b_device_info.f_device_type = 3
+    </select>
+  
+  <select id="getDeviceByConditions" resultType="String">
+      <!-- #厂商02 ,适配器    # 1. f_location 根 查询所有，2. 二级节点  查询其下的三级节点   。。。。。。  最后 是 in -->
+      select f_device_resource_code  from b_device_info where f_manufacturer_info = #{manufacturerNumber} 
+      
+      and f_device_model in 
+       <foreach collection="deviceModelList" index="index" item="deviceModel" open="(" separator="," close=")">
+                #{deviceModel}       
+       </foreach>
+       
+      and f_location in 
+       <foreach collection="resourceIdList" index="index" item="resourceId" open="(" separator="," close=")">
+                #{resourceId}       
+       </foreach>   
+       
+       and f_device_state in (0,1) and f_delete_flag =0
+  </select>
+  <!-- select f_id,f_device_name,f_device_resource_code,f_device_model,f_location  from b_device_info where f_manufacturer_info = '02' and f_location in  ()  and f_device_model in (72,73,74)  and f_delete_flag =0 -->
+  <!-- <select id="getAllAdapters"  resultType="Integer">
+       select f_id from b_device_info where f_code = 01 and f_device_state in (0,1) and f_delete_flag = 0 
+  </select> -->
+  <select id="getAllAdapters" resultType="Map" >
+       select f_id , f_device_name  from b_device_info where f_device_type = 0 and f_delete_flag = 0 and f_code='01'
+  </select>
+</mapper>

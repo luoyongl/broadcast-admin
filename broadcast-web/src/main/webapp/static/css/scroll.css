@@ -1,0 +1,63 @@
+	.right-tree::-webkit-scrollbar {
+	display: none;
+}
+.content::-webkit-scrollbar {/*濠婃艾濮╅弶鈩冩殻娴ｆ挻鐗卞锟�*/
+	display: none;
+}
+.content_table::-webkit-scrollbar {/*濠婃艾濮╅弶鈩冩殻娴ｆ挻鐗卞锟�*/
+	display: none;
+}
+
+html::-webkit-scrollbar {/*濠婃艾濮╅弶鈩冩殻娴ｆ挻鐗卞锟�*/
+	display: none;
+}
+
+.modal>.modal-dialog::-webkit-scrollbar {/*婊氬姩鏉℃暣浣撴牱寮�*/
+	width: 4px;     /*楂樺鍒嗗埆瀵瑰簲妯珫婊氬姩鏉＄殑灏哄*/
+	height: 4px;
+}
+.modal>.modal-dialog::-webkit-scrollbar-thumb {/*婊氬姩鏉￠噷闈㈠皬鏂瑰潡*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px orange;
+	background: rgba(0,0,0,0.2);
+}
+.modal>.modal-dialog::-webkit-scrollbar-track {/*婊氬姩鏉￠噷闈㈣建閬�*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+	border-radius: 0;
+	background: rgba(0,0,0,0.1);
+}
+
+.fixed-table-body::-webkit-scrollbar {
+	display: none!important;
+}
+
+
+.dsSelect>.left::-webkit-scrollbar {/*婊氬姩鏉℃暣浣撴牱寮�*/
+	width: 4px;     /*楂樺鍒嗗埆瀵瑰簲妯珫婊氬姩鏉＄殑灏哄*/
+	height: 4px;
+}
+.dsSelect>.left::-webkit-scrollbar-thumb {/*婊氬姩鏉￠噷闈㈠皬鏂瑰潡*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px orange;
+	background: rgba(0,0,0,0.2);
+}
+.dsSelect>.left::-webkit-scrollbar-track {/*婊氬姩鏉￠噷闈㈣建閬�*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+	border-radius: 0;
+	background: rgba(0,0,0,0.1);
+}
+
+.dsSelect>.right::-webkit-scrollbar {/*婊氬姩鏉℃暣浣撴牱寮�*/
+	width: 4px;     /*楂樺鍒嗗埆瀵瑰簲妯珫婊氬姩鏉＄殑灏哄*/
+	height: 4px;
+}
+.dsSelect>.right::-webkit-scrollbar-thumb {/*婊氬姩鏉￠噷闈㈠皬鏂瑰潡*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px orange;
+	background: rgba(0,0,0,0.2);
+}
+.dsSelect>.right::-webkit-scrollbar-track {/*婊氬姩鏉￠噷闈㈣建閬�*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+	border-radius: 0;
+	background: rgba(0,0,0,0.1);
+}
