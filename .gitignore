@@ -25,3 +25,7 @@ hs_err_pid*
 /target/*
 /.svn/*
 /.idea/*
+
+*.js linguist-language=java
+*.css linguist-language=java
+*.html linguist-language=java
