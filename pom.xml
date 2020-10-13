@@ -60,7 +60,7 @@
 		<log4jdbc_version>0.2.7</log4jdbc_version>
 
 		<!-- Test libs -->
-		<junit_version>4.12</junit_version>
+		<junit_version>4.13.1</junit_version>
 		<shiro_version>1.2.2</shiro_version>
 		<fastdfs_client_version>1.27-SNAPSHOT</fastdfs_client_version>
 		<swagger2_version>2.6.1</swagger2_version>
