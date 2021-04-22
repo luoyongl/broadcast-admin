@@ -42,7 +42,7 @@
 		<druid_version>1.1.12</druid_version>
 		
 		<!-- mybatis libs -->
-		<mybatis_version>3.2.6</mybatis_version>
+		<mybatis_version>3.5.6</mybatis_version>
 		<mybatis_spring_version>1.2.2</mybatis_spring_version>
 
 		<!-- commons libs -->
