@@ -29,7 +29,7 @@
 		<netty_version>3.2.5.Final</netty_version>
 		<mina_version>1.1.7</mina_version>
 		<grizzly_version>2.1.4</grizzly_version>
-		<httpclient_version>4.3.5</httpclient_version>
+		<httpclient_version>4.5.13</httpclient_version>
 		<zookeeper_version>3.3.3</zookeeper_version>
 		<zkclient_version>0.1</zkclient_version>
 		<jackson_versoin>2.8.7</jackson_versoin>
