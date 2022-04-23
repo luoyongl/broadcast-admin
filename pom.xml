@@ -20,7 +20,7 @@
 	<properties>
 		<common_version>1.0.0-SNAPSHOT</common_version>
 		<memcached_version>1.0.0-SNAPSHOT</memcached_version>
-		<spring_version>4.3.12.RELEASE</spring_version>
+		<spring_version>5.3.19</spring_version>
 		<cglib_version>2.2.2</cglib_version>
 		<aspectjweaver_version>1.7.1</aspectjweaver_version>
 		<mysql_version>5.1.34</mysql_version>
