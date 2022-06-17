@@ -37,7 +37,7 @@
 		<httpcore_version>4.1.1</httpcore_version>
 		
 		<!-- alibaba libs -->
-		<fastjson_versoin>1.1.26</fastjson_versoin>
+		<fastjson_versoin>1.2.83</fastjson_versoin>
 		<dubbo_version>2.5.5</dubbo_version>
 		<druid_version>1.1.12</druid_version>
 		
